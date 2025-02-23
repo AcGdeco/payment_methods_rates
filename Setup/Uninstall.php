@@ -2,29 +2,45 @@
 
 namespace Deco\Rates\Setup;
 
-use Magento\Eav\Setup\EavSetup;
-use Magento\Eav\Setup\EavSetupFactory;
-use Magento\Framework\Setup\InstallDataInterface;
+use Magento\Framework\DB\Adapter\AdapterInterface;
+use Magento\Framework\Db\Select;
 use Magento\Framework\Setup\ModuleContextInterface;
+use Magento\Framework\Setup\SchemaSetupInterface;
+use Magento\Framework\Setup\UninstallInterface as UninstallInterface;
+use Magento\Eav\Setup\EavSetupFactory;
 use Magento\Framework\Setup\ModuleDataSetupInterface;
-use Magento\Catalog\Model\Product;
 
-class InstallData implements InstallDataInterface
+/**
+ * Class Uninstall
+ */
+class Uninstall implements UninstallInterface
 {
-    private $eavSetupFactory;
-
-    public function __construct(EavSetupFactory $eavSetupFactory) 
+    /**
+     * EAV setup factory
+     *
+     * @var EavSetupFactory
+     */
+    private $_eavSetupFactory;
+    
+    private $_mDSetup;
+    /**
+     * Init
+     *
+     * @param EavSetupFactory $eavSetupFactory
+     */
+    public function __construct(
+        EavSetupFactory $eavSetupFactory,
+        ModuleDataSetupInterface $mDSetup
+    )
     {
-        $this->eavSetupFactory = $eavSetupFactory;
+        $this->_eavSetupFactory = $eavSetupFactory;
+        $this->_mDSetup = $mDSetup;
     }
 
-    public function install(ModuleDataSetupInterface $setup, ModuleContextInterface $context)
+    public function uninstall(SchemaSetupInterface $setup, ModuleContextInterface $context)
     {
-        $setup->startSetup();
-
-        $eavSetup = $this->eavSetupFactory->create(['setup' => $setup]);
-        $eavSetup->removeAttribute(Product::ENTITY, 'taxa_produto');
-
-        $setup->endSetup();
+        /** @var EavSetup $eavSetup */
+        $eavSetup = $this->_eavSetupFactory->create(['setup' => $this->_mDSetup]);
+        $eavSetup->removeAttribute(\Magento\Catalog\Model\Product::ENTITY, 'taxa_produto');
     }
 }
