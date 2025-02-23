@@ -30,6 +30,14 @@ class Data extends \Magento\Framework\App\Helper\AbstractHelper
         );
     }
 
+    public function getProductPercentageRate()
+    {
+        return $this->scopeConfig->getValue(
+            'decorates/general/product_rate_percentage',
+            \Magento\Store\Model\ScopeInterface::SCOPE_STORE
+        );
+    }
+
     public function getNumericalRate()
     {
         return $this->scopeConfig->getValue(
@@ -38,12 +46,34 @@ class Data extends \Magento\Framework\App\Helper\AbstractHelper
         );
     }
 
+    public function getTotalPercentageRatePrice($price, $taxaProduto)
+    {
+        
+        $ratePrice = $price;
+        if($price != 0){
+            if($taxaProduto != null){
+                $productPercentageRate = $this->getProductPercentageRate();
+                $ratePrice = $price + $price * $taxaProduto / 100;
+            }else if(!empty($this->getProductPercentageRate())){
+                $productPercentageRate = $this->getProductPercentageRate();
+                $ratePrice = $price + $price * $productPercentageRate / 100;
+            }
+            if(!empty($this->getPercentageRate())){
+                $percentageRate = $this->getPercentageRate();
+                $ratePrice = $ratePrice / (1 - ($percentageRate / 100));
+            }
+        }
+        return $ratePrice;
+    }
+
     public function getPercentageRatePrice($price)
     {
         $ratePrice = $price;
         if($price != 0){
-            $percentageRate = $this->getPercentageRate();
-            $ratePrice = $price / (1 - ($percentageRate / 100));
+            if(!empty($this->getPercentageRate())){
+                $percentageRate = $this->getPercentageRate();
+                $ratePrice = $ratePrice / (1 - ($percentageRate / 100));
+            }
         }
         return $ratePrice;
     }
@@ -52,9 +82,20 @@ class Data extends \Magento\Framework\App\Helper\AbstractHelper
     {
         $ratePrice = $price;
         if($price != 0){
-            $percentageRate = $this->getPercentageRate();
-            $numericalRate = $this->getNumericalRate();
-            $ratePrice = ($price + $numericalRate) / (1 - ($percentageRate / 100));
+            if(!empty($this->getPercentageRate()) && !empty($this->getNumericalRate())){
+                $percentageRate = $this->getPercentageRate();
+                $numericalRate = $this->getNumericalRate();
+
+                $ratePrice = ($price + $numericalRate) / (1 - ($percentageRate / 100));
+            }else if(!empty($this->getPercentageRate())){
+                $percentageRate = $this->getPercentageRate();
+
+                $ratePrice = ($price) / (1 - ($percentageRate / 100));
+            } else if(!empty($this->getNumericalRate())){
+                $numericalRate = $this->getNumericalRate();
+
+                $ratePrice = $price + $numericalRate;
+            } 
         }
         return $ratePrice;
     }

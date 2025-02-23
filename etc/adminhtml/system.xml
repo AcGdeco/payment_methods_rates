@@ -3,7 +3,7 @@
     <system>
         <section id="decorates" translate="label" sortOrder="500" showInDefault="1" showInWebsite="1" showInStore="1">
             <class>separator-top</class>
-            <label>Payment Methods Rates</label>
+            <label>Rates</label>
             <tab>sales</tab>
             <resource>Deco_Rates::rates_configuration</resource>
             <group id="general" translate="label" type="text" sortOrder="10" showInDefault="1" showInWebsite="0" showInStore="0">
@@ -15,7 +15,15 @@
                 <field id="rate_percentage" translate="label" type="text" sortOrder="1" showInDefault="1" showInWebsite="0" showInStore="0">
                     <label>Percentage Rate</label>
                     <validate>validate-number</validate>
-                    <comment>Applied to shipping and product prices</comment>
+                    <comment>Applied to shipping and product prices (Inverse calculation)</comment>
+                    <depends>
+                        <field id="enable">1</field>
+                    </depends>
+                </field>
+                <field id="product_rate_percentage" translate="label" type="text" sortOrder="1" showInDefault="1" showInWebsite="0" showInStore="0">
+                    <label>Product Percentage Rate</label>
+                    <validate>validate-number</validate>
+                    <comment>Applied to product prices (Direct calculation). This value is replaced by the Product Fee, if defined, located on the product creation/editing page.</comment>
                     <depends>
                         <field id="enable">1</field>
                     </depends>

@@ -4,12 +4,12 @@ namespace Deco\Rates\Plugin;
 
 use Deco\Rates\Helper\Data as HelperData;
 
-class Product
+class Price
 {
     protected $helperData;
     
     public function __construct(
-        HelperData $helperData
+        HelperData $helperData,
     ) {
         $this->helperData = $helperData;
     }
@@ -17,7 +17,8 @@ class Product
     public function afterGetPrice(\Magento\Catalog\Model\Product $subject, $result)
     {
         if($this->helperData->getEnable()) {
-            $result = $this->helperData->getPercentageRatePrice($result);
+            $taxaProduto = $subject->getData('taxa_produto') ? $subject->getData('taxa_produto') : null;
+            $result = $this->helperData->getTotalPercentageRatePrice($result, $taxaProduto);
         }
 
         return $result;
