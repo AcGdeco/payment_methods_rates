@@ -11,21 +11,20 @@ use Magento\Catalog\Model\Product;
 
 class InstallData implements InstallDataInterface
 {
-private $eavSetupFactory;
+    private $eavSetupFactory;
 
-public function __construct(EavSetupFactory $eavSetupFactory) 
-{
- $this->eavSetupFactory = $eavSetupFactory;
-}
+    public function __construct(EavSetupFactory $eavSetupFactory) 
+    {
+        $this->eavSetupFactory = $eavSetupFactory;
+    }
 
- public function install(ModuleDataSetupInterface $setup, ModuleContextInterface 
-  $context)
-   {
-    $setup->startSetup();
+    public function install(ModuleDataSetupInterface $setup, ModuleContextInterface $context)
+    {
+        $setup->startSetup();
 
-   $eavSetup = $this->eavSetupFactory->create(['setup' => $setup]);
-   $eavSetup->removeAttribute(Product::ENTITY, 'taxa_produto');
+        $eavSetup = $this->eavSetupFactory->create(['setup' => $setup]);
+        $eavSetup->removeAttribute(Product::ENTITY, 'taxa_produto');
 
-  $setup->endSetup();
-  }
+        $setup->endSetup();
+    }
 }
