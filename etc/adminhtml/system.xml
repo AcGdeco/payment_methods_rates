@@ -15,9 +15,7 @@
                 <field id="rate_percentage" translate="label" type="text" sortOrder="1" showInDefault="1" showInWebsite="0" showInStore="0">
                     <label>Percentage Rate</label>
                     <validate>validate-number</validate>
-                    <comment>
-                        Applied to shipping and product prices
-                    </comment>
+                    <comment>Applied to shipping and product prices</comment>
                     <depends>
                         <field id="enable">1</field>
                     </depends>
@@ -25,9 +23,7 @@
                 <field id="rate_value" translate="label" type="text" sortOrder="1" showInDefault="1" showInWebsite="0" showInStore="0">
                     <label>Numerical Rate</label>
                     <validate>validate-number</validate>
-                    <comment>
-                        Applied to shipping
-                    </comment>
+                    <comment>Applied to shipping</comment>
                     <depends>
                         <field id="enable">1</field>
                     </depends>
