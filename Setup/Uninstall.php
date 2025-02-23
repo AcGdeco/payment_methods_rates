@@ -7,7 +7,7 @@ use Magento\Eav\Setup\EavSetupFactory;
 use Magento\Framework\Setup\InstallDataInterface;
 use Magento\Framework\Setup\ModuleContextInterface;
 use Magento\Framework\Setup\ModuleDataSetupInterface;
-use \Magento\Catalog\Model\Product;
+use Magento\Catalog\Model\Product;
 
 class InstallData implements InstallDataInterface
 {
