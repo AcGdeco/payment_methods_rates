@@ -23,16 +23,18 @@ class InstallData implements InstallDataInterface
 
         $eavSetup->addAttribute(
             \Magento\Catalog\Model\Product::ENTITY,
-            'taxa_produto', // Código do atributo
+            'taxa_produto',
             [
-                'type' => 'decimal', // Tipo de dado (varchar, int, text, etc.)
+                'type' => 'decimal',
                 'backend' => '',
                 'frontend' => '',
-                'label' => 'Taxa Produto', // Rótulo do atributo
-                'input' => 'price', // Tipo de input (text, select, textarea, etc.)
+                'label' => 'Taxa Produto',
+                'input' => 'price',
                 'class' => '',
                 'source' => '',
                 'global' => \Magento\Eav\Model\Entity\Attribute\ScopedAttributeInterface::SCOPE_GLOBAL,
+                'group' => 'General',
+                'sort_order' => 1000,
                 'visible' => true,
                 'required' => false,
                 'user_defined' => true,
@@ -43,7 +45,7 @@ class InstallData implements InstallDataInterface
                 'visible_on_front' => false,
                 'used_in_product_listing' => true,
                 'unique' => false,
-                'apply_to' => 'simple,configurable,virtual,bundle,downloadable' // Tipos de produto aplicáveis
+                'apply_to' => 'simple,configurable,virtual,bundle,downloadable'
             ]
         );
     }
