@@ -5,5 +5,7 @@
 "Applied to shipping and product prices (Inverse calculation)","Aplicado no frete e nos preços dos produtos (Cálculo inverso)"
 "Applied to shipping","Aplicado no frete"
 "Product Fee","Taxa Produto"
-"Product Percentage Rate","Taxa percentual do produto"
+"Product Percentage Rate","Taxa Percentual do Produto"
 "Applied to product prices (Direct calculation). This value is replaced by the Product Fee, if defined, located on the product creation/editing page.","Aplicado aos preços dos produtos (Cálculo direto). Esse valor é substituído pela Taxa Produto, caso seja definida, localizada na página de criação/edição do produto."
+"Applied to product prices (Direct calculation). This value isn't replaced by the Product Fee, if defined, located on the product creation/editing page.","Aplicado aos preços de produtos (Cálculo direto). Este valor não é substituído pela Taxa de Produto, se definida, localizada na página de criação/edição do produto."
+"Unalterable Product Percentage Rate","Taxa Percentual do Produto Inalterável"

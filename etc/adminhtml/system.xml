@@ -28,6 +28,14 @@
                         <field id="enable">1</field>
                     </depends>
                 </field>
+                <field id="unalterable_product_rate_percentage" translate="label" type="text" sortOrder="1" showInDefault="1" showInWebsite="0" showInStore="0">
+                    <label>Unalterable Product Percentage Rate</label>
+                    <validate>validate-number</validate>
+                    <comment>Applied to product prices (Direct calculation). This value isn't replaced by the Product Fee, if defined, located on the product creation/editing page.</comment>
+                    <depends>
+                        <field id="enable">1</field>
+                    </depends>
+                </field>
                 <field id="rate_value" translate="label" type="text" sortOrder="1" showInDefault="1" showInWebsite="0" showInStore="0">
                     <label>Numerical Rate</label>
                     <validate>validate-number</validate>
