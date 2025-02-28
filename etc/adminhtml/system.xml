@@ -15,7 +15,7 @@
                 <field id="rate_percentage" translate="label" type="text" sortOrder="1" showInDefault="1" showInWebsite="0" showInStore="0">
                     <label>Percentage Rate</label>
                     <validate>validate-number</validate>
-                    <comment>Applied to shipping and product prices (Inverse calculation)</comment>
+                    <comment>Applied to shipping and product prices (Inverse calculation).</comment>
                     <depends>
                         <field id="enable">1</field>
                     </depends>
@@ -31,7 +31,7 @@
                 <field id="unalterable_product_rate_percentage" translate="label" type="text" sortOrder="1" showInDefault="1" showInWebsite="0" showInStore="0">
                     <label>Unalterable Product Percentage Rate</label>
                     <validate>validate-number</validate>
-                    <comment>Applied to product prices (Direct calculation). This value isn't replaced by the Product Fee, if defined, located on the product creation/editing page.</comment>
+                    <comment>Applied to product prices (Direct calculation).</comment>
                     <depends>
                         <field id="enable">1</field>
                     </depends>
@@ -39,7 +39,7 @@
                 <field id="rate_value" translate="label" type="text" sortOrder="1" showInDefault="1" showInWebsite="0" showInStore="0">
                     <label>Numerical Rate</label>
                     <validate>validate-number</validate>
-                    <comment>Applied to shipping</comment>
+                    <comment>Applied to shipping.</comment>
                     <depends>
                         <field id="enable">1</field>
                     </depends>
