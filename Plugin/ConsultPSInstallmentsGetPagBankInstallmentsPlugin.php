@@ -53,11 +53,13 @@ class ConsultPSInstallmentsGetPagBankInstallmentsPlugin
                     $total = $amount / 100;
                     $total = $total - ($total * 4.99 / 100);
                     $total = $total - $tax2;
-
+                    
                     $total = ($total + $tax2) / (1 - (($installmentsFees[$i] + $tax1) / 100));
                     $installment = $i + 1;
                     $installment_value = $total / $installment;
+                    $interestTotal = $total - $amount / 100;
 
+                    $interestTotal = $interestTotal * 100;
                     $total = $total * 100;
                     $installment_value = $installment_value * 100;
 
@@ -70,7 +72,7 @@ class ConsultPSInstallmentsGetPagBankInstallmentsPlugin
                             'fees' => [
                                 'buyer' => [
                                     'interest' => [
-                                        'total' => $total,
+                                        'total' => $interestTotal,
                                         'installments' => $installment,
                                     ],
                                 ],
