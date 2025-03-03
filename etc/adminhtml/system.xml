@@ -12,10 +12,18 @@
                     <label>Module Enable</label>
                     <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
                 </field>
-                <field id="rate_percentage" translate="label" type="text" sortOrder="1" showInDefault="1" showInWebsite="0" showInStore="0">
+                <field id="rate_percentage" translate="label" type="text" sortOrder="1" showInDefault="1" showInWebsite="0" showInStore="0" canRestore="1">
                     <label>Percentage Rate</label>
                     <validate>validate-number</validate>
                     <comment>Applied to shipping and product prices (Inverse calculation).</comment>
+                    <depends>
+                        <field id="enable">1</field>
+                    </depends>
+                </field>
+                <field id="rate_value" translate="label" type="text" sortOrder="1" showInDefault="1" showInWebsite="0" showInStore="0" canRestore="1">
+                    <label>Numerical Rate</label>
+                    <validate>validate-number</validate>
+                    <comment>Applied to shipping.</comment>
                     <depends>
                         <field id="enable">1</field>
                     </depends>
@@ -36,12 +44,141 @@
                         <field id="enable">1</field>
                     </depends>
                 </field>
-                <field id="rate_value" translate="label" type="text" sortOrder="1" showInDefault="1" showInWebsite="0" showInStore="0">
-                    <label>Numerical Rate</label>
+            </group>
+            <group id="installments_fees" translate="label" type="text" sortOrder="20" showInDefault="1" showInWebsite="0" showInStore="0">
+                <depends>
+                    <field id="decorates/general/enable">1</field>
+                </depends>
+                <label>Installments Fees</label>
+                <field id="installments_fees_enable" translate="label" type="select" sortOrder="1" showInDefault="1" showInWebsite="0" showInStore="0">
+                    <label>Installments Fees Enable</label>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                </field>
+                <field id="fee_0" translate="label" type="text" sortOrder="1" showInDefault="1" showInWebsite="0" showInStore="0" canRestore="1">
+                    <label>1x</label>
                     <validate>validate-number</validate>
-                    <comment>Applied to shipping.</comment>
                     <depends>
-                        <field id="enable">1</field>
+                        <field id="decorates/installments_fees/installments_fees_enable">1</field>
+                    </depends>
+                </field>
+                <field id="fee_1" translate="label" type="text" sortOrder="1" showInDefault="1" showInWebsite="0" showInStore="0" canRestore="1">
+                    <label>2x</label>
+                    <validate>validate-number</validate>
+                    <depends>
+                        <field id="decorates/installments_fees/installments_fees_enable">1</field>
+                    </depends>
+                </field>
+                <field id="fee_2" translate="label" type="text" sortOrder="1" showInDefault="1" showInWebsite="0" showInStore="0" canRestore="1">
+                    <label>3x</label>
+                    <validate>validate-number</validate>
+                    <depends>
+                        <field id="decorates/installments_fees/installments_fees_enable">1</field>
+                    </depends>
+                </field>
+                <field id="fee_3" translate="label" type="text" sortOrder="1" showInDefault="1" showInWebsite="0" showInStore="0" canRestore="1">
+                    <label>4x</label>
+                    <validate>validate-number</validate>
+                    <depends>
+                        <field id="decorates/installments_fees/installments_fees_enable">1</field>
+                    </depends>
+                </field>
+                <field id="fee_4" translate="label" type="text" sortOrder="1" showInDefault="1" showInWebsite="0" showInStore="0" canRestore="1">
+                    <label>5x</label>
+                    <validate>validate-number</validate>
+                    <depends>
+                        <field id="decorates/installments_fees/installments_fees_enable">1</field>
+                    </depends>
+                </field>
+                <field id="fee_5" translate="label" type="text" sortOrder="1" showInDefault="1" showInWebsite="0" showInStore="0" canRestore="1">
+                    <label>6x</label>
+                    <validate>validate-number</validate>
+                    <depends>
+                        <field id="decorates/installments_fees/installments_fees_enable">1</field>
+                    </depends>
+                </field>
+                <field id="fee_6" translate="label" type="text" sortOrder="1" showInDefault="1" showInWebsite="0" showInStore="0" canRestore="1">
+                    <label>7x</label>
+                    <validate>validate-number</validate>
+                    <depends>
+                        <field id="decorates/installments_fees/installments_fees_enable">1</field>
+                    </depends>
+                </field>
+                <field id="fee_7" translate="label" type="text" sortOrder="1" showInDefault="1" showInWebsite="0" showInStore="0" canRestore="1">
+                    <label>8x</label>
+                    <validate>validate-number</validate>
+                    <depends>
+                        <field id="decorates/installments_fees/installments_fees_enable">1</field>
+                    </depends>
+                </field>
+                <field id="fee_8" translate="label" type="text" sortOrder="1" showInDefault="1" showInWebsite="0" showInStore="0" canRestore="1">
+                    <label>9x</label>
+                    <validate>validate-number</validate>
+                    <depends>
+                        <field id="decorates/installments_fees/installments_fees_enable">1</field>
+                    </depends>
+                </field>
+                <field id="fee_9" translate="label" type="text" sortOrder="1" showInDefault="1" showInWebsite="0" showInStore="0" canRestore="1">
+                    <label>10x</label>
+                    <validate>validate-number</validate>
+                    <depends>
+                        <field id="decorates/installments_fees/installments_fees_enable">1</field>
+                    </depends>
+                </field>
+                <field id="fee_10" translate="label" type="text" sortOrder="1" showInDefault="1" showInWebsite="0" showInStore="0" canRestore="1">
+                    <label>11x</label>
+                    <validate>validate-number</validate>
+                    <depends>
+                        <field id="decorates/installments_fees/installments_fees_enable">1</field>
+                    </depends>
+                </field>
+                <field id="fee_11" translate="label" type="text" sortOrder="1" showInDefault="1" showInWebsite="0" showInStore="0" canRestore="1">
+                    <label>12x</label>
+                    <validate>validate-number</validate>
+                    <depends>
+                        <field id="decorates/installments_fees/installments_fees_enable">1</field>
+                    </depends>
+                </field>
+                <field id="fee_12" translate="label" type="text" sortOrder="1" showInDefault="1" showInWebsite="0" showInStore="0" canRestore="1">
+                    <label>13x</label>
+                    <validate>validate-number</validate>
+                    <depends>
+                        <field id="decorates/installments_fees/installments_fees_enable">1</field>
+                    </depends>
+                </field>
+                <field id="fee_13" translate="label" type="text" sortOrder="1" showInDefault="1" showInWebsite="0" showInStore="0" canRestore="1">
+                    <label>14x</label>
+                    <validate>validate-number</validate>
+                    <depends>
+                        <field id="decorates/installments_fees/installments_fees_enable">1</field>
+                    </depends>
+                </field>
+                <field id="fee_14" translate="label" type="text" sortOrder="1" showInDefault="1" showInWebsite="0" showInStore="0" canRestore="1">
+                    <label>15x</label>
+                    <validate>validate-number</validate>
+                    <depends>
+                        <field id="decorates/installments_fees/installments_fees_enable">1</field>
+                    </depends>
+                </field>
+                <field id="fee_15" translate="label" type="text" sortOrder="1" showInDefault="1" showInWebsite="0" showInStore="0" canRestore="1">
+                    <label>16x</label>
+                    <validate>validate-number</validate>
+                    <depends>
+                        <field id="decorates/installments_fees/installments_fees_enable">1</field>
+                    </depends>
+                </field>
+
+                <field id="fee_16" translate="label" type="text" sortOrder="1" showInDefault="1" showInWebsite="0" showInStore="0" canRestore="1">
+                    <label>17x</label>
+                    <validate>validate-number</validate>
+                    <depends>
+                        <field id="decorates/installments_fees/installments_fees_enable">1</field>
+                    </depends>
+                </field>
+                <field id="fee_17" translate="label" type="text" sortOrder="1" showInDefault="1" showInWebsite="0" showInStore="0" canRestore="1">
+                    <label>18x</label>
+                    <validate>validate-number</validate>
+                    <depends>
+                        <field id="decorates/installments_fees/installments_fees_enable">1</field>
                     </depends>
                 </field>
             </group>

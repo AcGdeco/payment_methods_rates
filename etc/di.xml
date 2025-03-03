@@ -10,4 +10,7 @@
     <type name="Magento\Catalog\Model\Product">
         <plugin name="product_special_price_rate" type="Deco\Rates\Plugin\Special" sortOrder="30" />
     </type>
+    <type name="PagBank\PaymentMagento\Model\Api\ConsultPSInstallments">
+        <plugin name="pagbank_installments_plugin" type="Deco\Rates\Plugin\ConsultPSInstallmentsGetPagBankInstallmentsPlugin" sortOrder="40" />
+    </type>
 </config>

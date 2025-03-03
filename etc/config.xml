@@ -4,7 +4,29 @@
         <decorates>
             <general>
                 <enable>1</enable>
+                <rate_percentage>4.99</rate_percentage>
+                <rate_value>0.4</rate_value>
             </general>
+            <installments_fees>
+                <fee_0>0</fee_0>
+                <fee_1>4.32</fee_1>
+                <fee_2>5.7</fee_2>
+                <fee_3>7.05</fee_3>
+                <fee_4>8.38</fee_4>
+                <fee_5>9.68</fee_5>
+                <fee_6>10.96</fee_6>
+                <fee_7>12.22</fee_7>
+                <fee_8>13.45</fee_8>
+                <fee_9>14.65</fee_9>
+                <fee_10>15.84</fee_10>
+                <fee_11>17</fee_11>
+                <fee_12>18.14</fee_12>
+                <fee_13>19.26</fee_13>
+                <fee_14>20.36</fee_14>
+                <fee_15>21.43</fee_15>
+                <fee_16>22.49</fee_16>
+                <fee_17>23.53</fee_17>
+            </installments_fees>
         </decorates>
     </default>
 </config>

@@ -22,6 +22,14 @@ class Data extends \Magento\Framework\App\Helper\AbstractHelper
         );
     }
 
+    public function getInstallmentsFeesEnable()
+    {
+        return $this->scopeConfig->getValue(
+            'decorates/installments_fees/installments_fees_enable',
+            \Magento\Store\Model\ScopeInterface::SCOPE_STORE
+        );
+    }
+
     public function getPercentageRate()
     {
         return $this->scopeConfig->getValue(
@@ -52,6 +60,18 @@ class Data extends \Magento\Framework\App\Helper\AbstractHelper
             'decorates/general/rate_value',
             \Magento\Store\Model\ScopeInterface::SCOPE_STORE
         );
+    }
+
+    public function getInstallmentsFees()
+    {
+        for($i = 0; $i <= 17; $i++){
+            $installementsFees[$i] = $this->scopeConfig->getValue(
+                'decorates/installments_fees/fee_'.$i,
+                \Magento\Store\Model\ScopeInterface::SCOPE_STORE
+            );
+        }
+        
+        return $installementsFees;
     }
 
     public function getTotalPercentageRatePrice($price, $taxaProduto)

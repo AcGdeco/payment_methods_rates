@@ -9,7 +9,7 @@ class Price
     protected $helperData;
     
     public function __construct(
-        HelperData $helperData,
+        HelperData $helperData
     ) {
         $this->helperData = $helperData;
     }
