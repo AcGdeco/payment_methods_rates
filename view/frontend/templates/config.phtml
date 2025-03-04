@@ -1,0 +1,13 @@
+<?php
+$config = json_encode($block->getConfig());
+?>
+
+<script type="text/x-magento-init">
+    {
+        "*": {
+            "deco_rates_config": {
+                "decoRatesConfig":<?= $config; ?>
+            }
+        }
+    }
+</script>
