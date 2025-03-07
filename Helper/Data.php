@@ -3,15 +3,32 @@
 namespace Deco\Rates\Helper;
 
 use Magento\Framework\App\Config\ScopeConfigInterface;
+use Magento\Framework\App\State;
 
 class Data extends \Magento\Framework\App\Helper\AbstractHelper
 {
     protected $scopeConfig;
+    protected $state;
 
     public function __construct(
-        ScopeConfigInterface $scopeConfig
+        ScopeConfigInterface $scopeConfig,
+        State $state
     ) {
         $this->scopeConfig = $scopeConfig;
+        $this->state = $state;
+    }
+
+    public function getIfAPICall()
+    {
+        $areaCode = $this->state->getAreaCode();
+
+        if ($this->state->getAreaCode() == "webapi_rest") {
+            $isAPI = true;
+        } else {
+            $isAPI = false;
+        }
+
+        return $isAPI;
     }
 
     public function getEnable()
