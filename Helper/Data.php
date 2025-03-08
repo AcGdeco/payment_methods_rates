@@ -3,26 +3,32 @@
 namespace Deco\Rates\Helper;
 
 use Magento\Framework\App\Config\ScopeConfigInterface;
-use Magento\Framework\App\State;
+use Magento\Store\Model\StoreManagerInterface;
+use Magento\Framework\UrlInterface;
 
 class Data extends \Magento\Framework\App\Helper\AbstractHelper
 {
     protected $scopeConfig;
-    protected $state;
+    protected $storeManager;
+    protected $urlInterface;
 
     public function __construct(
         ScopeConfigInterface $scopeConfig,
-        State $state
+        StoreManagerInterface $storeManager,
+        UrlInterface $urlInterface
     ) {
         $this->scopeConfig = $scopeConfig;
-        $this->state = $state;
+        $this->storeManager = $storeManager;
+        $this->urlInterface = $urlInterface;
     }
 
     public function getIfAPICall()
     {
-        $areaCode = $this->state->getAreaCode();
+        $urlBase = $this->storeManager->getStore()->getBaseUrl();
+        $urlCall = $this->urlInterface->getCurrentUrl();
+        $substring = $urlBase."rest/all/V1/products";
 
-        if ($this->state->getAreaCode() == "webapi_rest") {
+        if (strpos($urlCall, $substring) !== false) {
             $isAPI = true;
         } else {
             $isAPI = false;
@@ -91,23 +97,26 @@ class Data extends \Magento\Framework\App\Helper\AbstractHelper
         return $installementsFees;
     }
 
-    public function getTotalPercentageRatePrice($price, $taxaProduto)
+    public function getTotalPercentageRatePrice($price, $taxaProduto, $freteFornecedor)
     {
         
         $ratePrice = $price;
         if($price != 0){
-            if($taxaProduto != null){
+            if($freteFornecedor != null){
+                $ratePrice = $ratePrice + $freteFornecedor;
+            }
+            if($taxaProduto != null) {
                 $ratePrice = $ratePrice + $ratePrice * $taxaProduto / 100;
-            }else if(!empty($this->getProductPercentageRate())){
+            } else if(!empty($this->getProductPercentageRate())){
                 $productPercentageRate = $this->getProductPercentageRate();
                 $ratePrice = $ratePrice + $ratePrice * $productPercentageRate / 100;
             }
-            if(!empty($this->getUnalterableProductPercentageRate())){
+            if(!empty($this->getUnalterableProductPercentageRate())) {
                 $unalterableProductPercentageRate = $this->getUnalterableProductPercentageRate();
                 $rateUnalterablePrice = $price * $unalterableProductPercentageRate / 100;
                 $ratePrice = $ratePrice + $rateUnalterablePrice;
             }
-            if(!empty($this->getPercentageRate())){
+            if(!empty($this->getPercentageRate())) {
                 $percentageRate = $this->getPercentageRate();
                 $ratePrice = $ratePrice / (1 - ($percentageRate / 100));
             }

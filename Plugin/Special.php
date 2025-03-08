@@ -18,7 +18,8 @@ class Special
     { 
         if($this->helperData->getEnable() && !$this->helperData->getIfAPICall()) {
             $taxaProduto = $subject->getData('taxa_produto') ? $subject->getData('taxa_produto') : null;
-            $result = $this->helperData->getTotalPercentageRatePrice($result, $taxaProduto);
+            $freteFornecedor = $subject->getData('frete_fornecedor') ? $subject->getData('frete_fornecedor') : null;
+            $result = $this->helperData->getTotalPercentageRatePrice($result, $taxaProduto, $freteFornecedor);
         }
 
         return $result;
