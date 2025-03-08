@@ -48,5 +48,33 @@ class InstallData implements InstallDataInterface
                 'apply_to' => 'simple,configurable,virtual,bundle,downloadable'
             ]
         );
+
+        $eavSetup->addAttribute(
+            \Magento\Catalog\Model\Product::ENTITY,
+            'frete_fornecedor',
+            [
+                'type' => 'decimal',
+                'backend' => '',
+                'frontend' => '',
+                'label' => 'Freight Supplier',
+                'input' => 'text',
+                'class' => '',
+                'source' => '',
+                'global' => \Magento\Eav\Model\Entity\Attribute\ScopedAttributeInterface::SCOPE_GLOBAL,
+                'group' => 'General',
+                'sort_order' => 1100,
+                'visible' => true,
+                'required' => false,
+                'user_defined' => true,
+                'default' => '',
+                'searchable' => false,
+                'filterable' => false,
+                'comparable' => false,
+                'visible_on_front' => false,
+                'used_in_product_listing' => true,
+                'unique' => false,
+                'apply_to' => 'simple,configurable,virtual,bundle,downloadable'
+            ]
+        );
     }
 }
