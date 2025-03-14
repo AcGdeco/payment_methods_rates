@@ -7,19 +7,15 @@ use Magento\Eav\Setup\EavSetupFactory;
 use Magento\Framework\Setup\InstallDataInterface;
 use Magento\Framework\Setup\ModuleContextInterface;
 use Magento\Framework\Setup\ModuleDataSetupInterface;
-use Deco\Rates\Block\UpdateTotalPrice;
 
 class InstallData implements InstallDataInterface
 {
     private $eavSetupFactory;
-    private $updateTotalPrice;
 
     public function __construct(
-        EavSetupFactory $eavSetupFactory,
-        UpdateTotalPrice $updateTotalPrice
+        EavSetupFactory $eavSetupFactory
     ) {
         $this->eavSetupFactory = $eavSetupFactory;
-        $this->updateTotalPrice = $updateTotalPrice;
     }
 
     public function install(ModuleDataSetupInterface $setup, ModuleContextInterface $context)
@@ -119,6 +115,13 @@ class InstallData implements InstallDataInterface
             false
         );
 
-        $this->updateTotalPrice->addTotalPriceProductsValues();
+        $this->addTotalPriceProductsValues();
+    }
+
+    public function addTotalPriceProductsValues()
+    {
+        foreach($this->collection as $product) {
+            $product = $product->save();
+        }
     }
 }
