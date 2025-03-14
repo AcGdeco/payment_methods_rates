@@ -76,42 +76,5 @@ class InstallData implements InstallDataInterface
                 'apply_to' => 'simple,configurable,virtual,bundle,downloadable'
             ]
         );
-
-        $eavSetup->addAttribute(
-            \Magento\Catalog\Model\Product::ENTITY,
-            'preco_total',
-            [
-                'type' => 'decimal',
-                'backend' => '',
-                'frontend' => '',
-                'label' => 'Preço',
-                'input' => 'text',
-                'class' => '',
-                'source' => '',
-                'global' => \Magento\Eav\Model\Entity\Attribute\ScopedAttributeInterface::SCOPE_GLOBAL,
-                'group' => 'General',
-                'sort_order' => 1150,
-                'visible' => true,
-                'required' => false,
-                'user_defined' => true,
-                'default' => '',
-                'searchable' => false,
-                'filterable' => false,
-                'comparable' => false,
-                'visible_on_front' => false,
-                'used_in_product_listing' => true,
-                'used_for_sort_by' => true,
-                'unique' => false,
-                'disable' => true,
-                'apply_to' => 'simple,configurable,virtual,bundle,downloadable'
-            ]
-        );
-        
-        $eavSetup->updateAttribute(
-            \Magento\Catalog\Model\Product::ENTITY,
-            'price',
-            'used_for_sort_by',
-            false
-        );
     }
 }
