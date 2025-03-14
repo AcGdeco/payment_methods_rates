@@ -6,7 +6,7 @@ use Magento\Framework\Event\ObserverInterface;
 use Magento\Framework\Event\Observer as EventObserver;
 use Deco\Rates\Block\UpdateTotalPrice;
 
-class ConfigObserver implements ObserverInterface
+class ProductsAllTotalPrice implements ObserverInterface
 {
     /**
      * @var UpdateTotalPrice
