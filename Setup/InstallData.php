@@ -113,5 +113,14 @@ class InstallData implements InstallDataInterface
             'used_for_sort_by',
             false
         );
+
+        $objectManager = \Magento\Framework\App\ObjectManager::getInstance();
+        $productCollection = $objectManager->create('Magento\Catalog\Model\ResourceModel\Product\Collection');
+        $collection = $productCollection->addAttributeToSelect('*')
+                    ->load();
+
+        foreach ($collection as $product){
+            $product = $product->save();
+        }  
     }
 }
