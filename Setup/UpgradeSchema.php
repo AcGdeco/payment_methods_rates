@@ -21,6 +21,9 @@ class UpgradeSchema implements UpgradeSchemaInterface {
     public function upgrade(
     SchemaSetupInterface $setup, ModuleContextInterface $context
     ) {
+        $setup->startSetup();
         $this->updateTotalPrice->addTotalPriceProductsValues();
+        $setup->endSetup();
+
     }
 }
