@@ -7,15 +7,19 @@ use Magento\Eav\Setup\EavSetupFactory;
 use Magento\Framework\Setup\InstallDataInterface;
 use Magento\Framework\Setup\ModuleContextInterface;
 use Magento\Framework\Setup\ModuleDataSetupInterface;
+use Magento\Catalog\Model\ResourceModel\Product\CollectionFactory;
 
 class InstallData implements InstallDataInterface
 {
     private $eavSetupFactory;
+    protected $collection;
 
     public function __construct(
-        EavSetupFactory $eavSetupFactory
+        EavSetupFactory $eavSetupFactory,
+        CollectionFactory $collectionFactory,
     ) {
         $this->eavSetupFactory = $eavSetupFactory;
+        $this->collection = $collectionFactory->create();
     }
 
     public function install(ModuleDataSetupInterface $setup, ModuleContextInterface $context)
