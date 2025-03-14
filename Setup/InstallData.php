@@ -102,7 +102,6 @@ class InstallData implements InstallDataInterface
                 'used_in_product_listing' => true,
                 'used_for_sort_by' => true,
                 'unique' => false,
-                'is_active' => false,
                 'apply_to' => 'simple,configurable,virtual,bundle,downloadable'
             ]
         );
