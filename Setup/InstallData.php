@@ -7,19 +7,15 @@ use Magento\Eav\Setup\EavSetupFactory;
 use Magento\Framework\Setup\InstallDataInterface;
 use Magento\Framework\Setup\ModuleContextInterface;
 use Magento\Framework\Setup\ModuleDataSetupInterface;
-use Magento\Catalog\Model\ResourceModel\Product\CollectionFactory;
 
 class InstallData implements InstallDataInterface
 {
     private $eavSetupFactory;
-    protected $collection;
 
     public function __construct(
-        EavSetupFactory $eavSetupFactory,
-        CollectionFactory $collectionFactory,
+        EavSetupFactory $eavSetupFactory
     ) {
         $this->eavSetupFactory = $eavSetupFactory;
-        $this->collection = $collectionFactory->create();
     }
 
     public function install(ModuleDataSetupInterface $setup, ModuleContextInterface $context)
@@ -118,14 +114,5 @@ class InstallData implements InstallDataInterface
             'used_for_sort_by',
             false
         );
-
-        $this->addTotalPriceProductsValues();
-    }
-
-    public function addTotalPriceProductsValues()
-    {
-        foreach($this->collection as $product) {
-            $product = $product->save();
-        }
     }
 }
