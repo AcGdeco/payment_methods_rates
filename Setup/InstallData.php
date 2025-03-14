@@ -106,5 +106,12 @@ class InstallData implements InstallDataInterface
                 'apply_to' => 'simple,configurable,virtual,bundle,downloadable'
             ]
         );
+        
+        $eavSetup->updateAttribute(
+            \Magento\Catalog\Model\Product::ENTITY,
+            'price',
+            'used_for_sort_by',
+            false
+        );
     }
 }
