@@ -53,7 +53,7 @@ class InstallData implements InstallDataInterface
             \Magento\Catalog\Model\Product::ENTITY,
             'frete_fornecedor',
             [
-                'type' => 'decimal',
+                'type' => 'price',
                 'backend' => '',
                 'frontend' => '',
                 'label' => 'Freight Supplier',
@@ -81,7 +81,7 @@ class InstallData implements InstallDataInterface
             \Magento\Catalog\Model\Product::ENTITY,
             'preco_total',
             [
-                'type' => 'decimal',
+                'type' => 'price',
                 'backend' => '',
                 'frontend' => '',
                 'label' => 'Preço',
