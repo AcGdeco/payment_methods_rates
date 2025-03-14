@@ -53,7 +53,7 @@ class InstallData implements InstallDataInterface
             \Magento\Catalog\Model\Product::ENTITY,
             'frete_fornecedor',
             [
-                'type' => 'decimal',
+                'type' => 'price',
                 'backend' => '',
                 'frontend' => '',
                 'label' => 'Freight Supplier',
@@ -75,6 +75,42 @@ class InstallData implements InstallDataInterface
                 'unique' => false,
                 'apply_to' => 'simple,configurable,virtual,bundle,downloadable'
             ]
+        );
+
+        $eavSetup->addAttribute(
+            \Magento\Catalog\Model\Product::ENTITY,
+            'preco_total',
+            [
+                'type' => 'price',
+                'backend' => '',
+                'frontend' => '',
+                'label' => 'Preço',
+                'input' => 'text',
+                'class' => '',
+                'source' => '',
+                'global' => \Magento\Eav\Model\Entity\Attribute\ScopedAttributeInterface::SCOPE_GLOBAL,
+                'group' => 'General',
+                'sort_order' => 1150,
+                'visible' => true,
+                'required' => false,
+                'user_defined' => true,
+                'default' => '',
+                'searchable' => false,
+                'filterable' => false,
+                'comparable' => false,
+                'visible_on_front' => false,
+                'used_in_product_listing' => true,
+                'used_for_sort_by' => true,
+                'unique' => false,
+                'apply_to' => 'simple,configurable,virtual,bundle,downloadable'
+            ]
+        );
+        
+        $eavSetup->updateAttribute(
+            \Magento\Catalog\Model\Product::ENTITY,
+            'price',
+            'used_for_sort_by',
+            false
         );
     }
 }
