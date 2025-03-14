@@ -86,7 +86,7 @@ class InstallData implements InstallDataInterface
                 'frontend' => '',
                 'label' => 'Preço',
                 'input' => 'price',
-                'class' => '',
+                'class' => 'disabled',
                 'source' => '',
                 'global' => \Magento\Eav\Model\Entity\Attribute\ScopedAttributeInterface::SCOPE_GLOBAL,
                 'group' => 'General',
@@ -102,8 +102,6 @@ class InstallData implements InstallDataInterface
                 'used_in_product_listing' => true,
                 'used_for_sort_by' => true,
                 'unique' => false,
-                'disable' => true,
-                'is_active' => false,
                 'apply_to' => 'simple,configurable,virtual,bundle,downloadable'
             ]
         );
