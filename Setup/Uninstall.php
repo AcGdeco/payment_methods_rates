@@ -44,6 +44,6 @@ class Uninstall implements UninstallInterface
         $eavSetup->removeAttribute(\Magento\Catalog\Model\Product::ENTITY, 'taxa_produto');
         $eavSetup->removeAttribute(\Magento\Catalog\Model\Product::ENTITY, 'frete_fornecedor');
         $eavSetup->removeAttribute(\Magento\Catalog\Model\Product::ENTITY, 'preco_fornecedor');
-        $eavSetup->removeAttribute(\Magento\Catalog\Model\Product::ENTITY, 'preco_total');
+        $eavSetup->removeAttribute(\Magento\Catalog\Model\Product::ENTITY, 'preco_especial');
     }
 }
