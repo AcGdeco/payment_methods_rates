@@ -7,4 +7,7 @@
     <type name="PagBank\PaymentMagento\Model\Api\ConsultPSInstallments">
         <plugin name="pagbank_installments_plugin" type="Deco\Rates\Plugin\ConsultPSInstallmentsGetPagBankInstallmentsPlugin" sortOrder="40" />
     </type>
+    <type name="Magento\Catalog\Api\ProductRepositoryInterface">
+        <plugin name="deco_rates_product_repository_plugin" type="Deco\Rates\Plugin\BeforeSaveProduct"/>
+    </type>
 </config>
