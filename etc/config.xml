@@ -3,11 +3,12 @@
     <default>
         <decorates>
             <general>
-                <enable>0</enable>
+                <enable>1</enable>
                 <rate_percentage>4.99</rate_percentage>
                 <rate_value>0.4</rate_value>
             </general>
             <installments_fees>
+                <installments_fees_enable>1</installments_fees_enable>
                 <fee_0>0</fee_0>
                 <fee_1>4.32</fee_1>
                 <fee_2>5.7</fee_2>

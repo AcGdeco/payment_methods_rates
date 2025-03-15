@@ -4,12 +4,6 @@
     <type name="Magento\Quote\Model\Quote\Address\Rate">
         <plugin name="shipping_rate" type="Deco\Rates\Plugin\Shipping" sortOrder="10"/>
     </type>
-    <type name="Magento\Catalog\Model\Product">
-        <plugin name="product_rate" type="Deco\Rates\Plugin\Price" sortOrder="20" disabled="true"/>
-    </type>
-    <type name="Magento\Catalog\Model\Product">
-        <plugin name="product_special_price_rate" type="Deco\Rates\Plugin\Special" sortOrder="30" disabled="true" />
-    </type>
     <type name="PagBank\PaymentMagento\Model\Api\ConsultPSInstallments">
         <plugin name="pagbank_installments_plugin" type="Deco\Rates\Plugin\ConsultPSInstallmentsGetPagBankInstallmentsPlugin" sortOrder="40" />
     </type>

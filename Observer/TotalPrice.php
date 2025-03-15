@@ -3,31 +3,32 @@ namespace Deco\Rates\Observer;
 
 use Magento\Framework\Event\ObserverInterface;
 use Deco\Rates\Helper\Data as HelperData;
-use Magento\Catalog\Model\Product;
 
 class TotalPrice implements ObserverInterface
 {
     protected $helperData;
-    protected $product;
     
     public function __construct(
-        HelperData $helperData,
-        Product $product
+        HelperData $helperData
     ) {
         $this->helperData = $helperData;
-        $this->product = $product;
     }
 
     public function execute(
         \Magento\Framework\Event\Observer $observer
     ) {
-
         if($this->helperData->getEnable()) {
-            $taxaProduto = $this->product->getData('taxa_produto') || $this->product->getData('taxa_produto') == 0 ? $this->product->getData('taxa_produto') : null;
-            $freteFornecedor = $this->product->getData('frete_fornecedor') ? $this->product->getData('frete_fornecedor') : null;
-            $precoFornecedor = $this->product->getData('preco_fornecedor') ? $this->product->getData('preco_fornecedor') : null;
+            $product = $observer->getData('product');
+            $taxaProduto = $product->getData('taxa_produto') || $product->getData('taxa_produto') == 0 ? $product->getData('taxa_produto') : null;
+            $freteFornecedor = $product->getData('frete_fornecedor') ? $product->getData('frete_fornecedor') : null;
+            $precoFornecedor = $product->getData('preco_fornecedor') ? $product->getData('preco_fornecedor') : null;
             $preco = $this->helperData->getTotalPercentageRatePrice($precoFornecedor, $taxaProduto, $freteFornecedor);
-            $this->product->setPrice($preco);
+            $product->setPrice($preco);
+
+            if($product->getPrecoEspecial() != null && $product->getPrecoEspecial() != ""){
+                $specialPrice = $this->helperData->getTotalPercentageRatePrice($product->getPrecoEspecial(), $taxaProduto, $freteFornecedor);
+                $product->setSpecialPrice($specialPrice);
+            }
         }
     }
 }

@@ -4,5 +4,6 @@
         <attribute name="taxa_produto"/>
         <attribute name="frete_fornecedor"/>
         <attribute name="preco_fornecedor"/>
+        <attribute name="preco_especial"/>
     </group>
 </config>

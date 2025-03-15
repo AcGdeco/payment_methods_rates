@@ -22,33 +22,10 @@ class Data extends \Magento\Framework\App\Helper\AbstractHelper
         $this->urlInterface = $urlInterface;
     }
 
-    public function getIfAPICall()
-    {
-        $urlBase = $this->storeManager->getStore()->getBaseUrl();
-        $urlCall = $this->urlInterface->getCurrentUrl();
-        $substring = $urlBase."rest/all/V1/products";
-
-        if (strpos($urlCall, $substring) !== false) {
-            $isAPI = true;
-        } else {
-            $isAPI = false;
-        }
-
-        return $isAPI;
-    }
-
     public function getEnable()
     {
         return $this->scopeConfig->getValue(
             'decorates/general/enable',
-            \Magento\Store\Model\ScopeInterface::SCOPE_STORE
-        );
-    }
-
-    public function getRunScript()
-    {
-        return $this->scopeConfig->getValue(
-            'decorates/general/run_script',
             \Magento\Store\Model\ScopeInterface::SCOPE_STORE
         );
     }

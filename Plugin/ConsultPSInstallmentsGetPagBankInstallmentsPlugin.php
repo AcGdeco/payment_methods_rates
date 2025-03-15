@@ -51,7 +51,7 @@ class ConsultPSInstallmentsGetPagBankInstallmentsPlugin
                     $tax2 = $this->helperData->getNumericalRate();
                     $total = $amount;
                     $total = $amount / 100;
-                    $total = $total - ($total * 4.99 / 100);
+                    $total = $total - ($total * $tax1 / 100);
                     $total = $total - $tax2;
                     
                     $total = ($total + $tax2) / (1 - (($installmentsFees[$i] + $tax1) / 100));

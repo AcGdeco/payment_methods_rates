@@ -133,42 +133,10 @@ class InstallData implements InstallDataInterface
                 'comparable' => false,
                 'visible_on_front' => false,
                 'used_in_product_listing' => true,
-                'used_for_sort_by' => true,
+                'used_for_sort_by' => false,
                 'unique' => false,
                 'apply_to' => 'simple,configurable,virtual,bundle,downloadable'
             ]
         );
-
-        $eavSetup->updateAttribute(
-            \Magento\Catalog\Model\Product::ENTITY,
-            'price',
-            'used_for_sort_by',
-            false
-        );
-
-        $setup->startSetup();
-
-        $this->configWriter->save(
-            'decorates/general/enable',
-            0,
-            \Magento\Framework\App\Config\ScopeConfigInterface::SCOPE_TYPE_DEFAULT,
-            0
-        );
-
-        $this->configWriter->save(
-            'decorates/installments_fees/installments_fees_enable',
-            0,
-            \Magento\Framework\App\Config\ScopeConfigInterface::SCOPE_TYPE_DEFAULT,
-            0
-        );
-
-        $this->configWriter->save(
-            'decorates/general/run_script',
-            1,
-            \Magento\Framework\App\Config\ScopeConfigInterface::SCOPE_TYPE_DEFAULT,
-            0
-        );
-
-        $setup->endSetup();
     }
 }
