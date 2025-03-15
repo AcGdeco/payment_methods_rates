@@ -3,5 +3,6 @@
     <group name="quote_item">
         <attribute name="taxa_produto"/>
         <attribute name="frete_fornecedor"/>
+        <attribute name="preco_fornecedor"/>
     </group>
 </config>

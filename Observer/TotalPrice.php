@@ -21,15 +21,13 @@ class TotalPrice implements ObserverInterface
     public function execute(
         \Magento\Framework\Event\Observer $observer
     ) {
+
         if($this->helperData->getEnable()) {
-            $_product = $observer->getProduct();
-            $id = $_product->getData("entity_id");
-            $price = $_product->getPrice();
-            if($price == null){
-                $product = $this->product->load($id);
-                $price = $product->getPrice();
-            }
-            $_product->setPrecoTotal($price);
+            $taxaProduto = $this->product->getData('taxa_produto') || $this->product->getData('taxa_produto') == 0 ? $this->product->getData('taxa_produto') : null;
+            $freteFornecedor = $this->product->getData('frete_fornecedor') ? $this->product->getData('frete_fornecedor') : null;
+            $precoFornecedor = $this->product->getData('preco_fornecedor') ? $this->product->getData('preco_fornecedor') : null;
+            $preco = $this->helperData->getTotalPercentageRatePrice($precoFornecedor, $taxaProduto, $freteFornecedor);
+            $this->product->setPrice($preco);
         }
     }
 }

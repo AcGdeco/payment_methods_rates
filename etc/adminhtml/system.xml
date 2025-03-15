@@ -15,7 +15,7 @@
                 <field id="run_script" translate="label" type="select" sortOrder="1" showInDefault="1" showInWebsite="0" showInStore="0">
                     <label>Run Script</label>
                     <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
-                    <comment>Setting the value to yes and saving will run a script to update the total price of all products.</comment>
+                    <comment>Setting the value to yes and saving will run a script to update the price of all products.</comment>
                     <depends>
                         <field id="enable">1</field>
                     </depends>

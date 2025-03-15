@@ -67,7 +67,7 @@ class InstallData implements InstallDataInterface
                 'source' => '',
                 'global' => \Magento\Eav\Model\Entity\Attribute\ScopedAttributeInterface::SCOPE_GLOBAL,
                 'group' => 'General',
-                'sort_order' => 1100,
+                'sort_order' => 450,
                 'visible' => true,
                 'required' => false,
                 'user_defined' => true,
@@ -84,7 +84,7 @@ class InstallData implements InstallDataInterface
 
         $eavSetup->addAttribute(
             \Magento\Catalog\Model\Product::ENTITY,
-            'preco_total',
+            'preco_fornecedor',
             [
                 'type' => 'decimal',
                 'backend' => '',
@@ -95,7 +95,36 @@ class InstallData implements InstallDataInterface
                 'source' => '',
                 'global' => \Magento\Eav\Model\Entity\Attribute\ScopedAttributeInterface::SCOPE_GLOBAL,
                 'group' => 'General',
-                'sort_order' => 1150,
+                'sort_order' => 42,
+                'visible' => true,
+                'required' => true,
+                'user_defined' => true,
+                'default' => '',
+                'searchable' => false,
+                'filterable' => false,
+                'comparable' => false,
+                'visible_on_front' => false,
+                'used_in_product_listing' => true,
+                'used_for_sort_by' => true,
+                'unique' => false,
+                'apply_to' => 'simple,configurable,virtual,bundle,downloadable'
+            ]
+        );
+
+        $eavSetup->addAttribute(
+            \Magento\Catalog\Model\Product::ENTITY,
+            'preco_especial',
+            [
+                'type' => 'decimal',
+                'backend' => '',
+                'frontend' => '',
+                'label' => 'Preço Especial Livre',
+                'input' => 'price',
+                'class' => '',
+                'source' => '',
+                'global' => \Magento\Eav\Model\Entity\Attribute\ScopedAttributeInterface::SCOPE_GLOBAL,
+                'group' => 'Advanced Pricing',
+                'sort_order' => 0,
                 'visible' => true,
                 'required' => false,
                 'user_defined' => true,
