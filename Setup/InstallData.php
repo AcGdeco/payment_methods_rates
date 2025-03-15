@@ -89,7 +89,7 @@ class InstallData implements InstallDataInterface
                 'type' => 'decimal',
                 'backend' => '',
                 'frontend' => '',
-                'label' => 'Preço',
+                'label' => 'Preço Total (preenche automaticamente)',
                 'input' => 'price',
                 'class' => '',
                 'source' => '',
@@ -107,7 +107,10 @@ class InstallData implements InstallDataInterface
                 'used_in_product_listing' => true,
                 'used_for_sort_by' => true,
                 'unique' => false,
-                'apply_to' => 'simple,configurable,virtual,bundle,downloadable'
+                'apply_to' => 'simple,configurable,virtual,bundle,downloadable',
+                'store_labels' => [
+                    0 => 'Preço'
+                ]
             ]
         );
 
