@@ -108,8 +108,11 @@ class InstallData implements InstallDataInterface
                 'used_for_sort_by' => true,
                 'unique' => false,
                 'apply_to' => 'simple,configurable,virtual,bundle,downloadable',
-                'store_labels' => [
-                    0 => 'Preço'
+                'scope_store_text' => 'store',
+                'scope_global_text' => 'global',
+                'scope_website_text' => 'website',
+                'frontend_label' => [
+                    1 => 'Preço'
                 ]
             ]
         );
