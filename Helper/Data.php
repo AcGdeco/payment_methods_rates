@@ -45,6 +45,14 @@ class Data extends \Magento\Framework\App\Helper\AbstractHelper
         );
     }
 
+    public function getRunScript()
+    {
+        return $this->scopeConfig->getValue(
+            'decorates/general/run_script',
+            \Magento\Store\Model\ScopeInterface::SCOPE_STORE
+        );
+    }
+
     public function getInstallmentsFeesEnable()
     {
         return $this->scopeConfig->getValue(

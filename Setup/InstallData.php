@@ -113,5 +113,32 @@ class InstallData implements InstallDataInterface
             'used_for_sort_by',
             false
         );
+
+        $data = [
+            'scope' => 'default',
+            'scope_id' => 0,
+            'path' => 'decorates/general/enable',
+            'value' => '0'
+        ];
+        $this->setup->getConnection()
+            ->insertOnDuplicate($this->setup->getTable('core_config_data'), $data, ['value']);
+
+        $data = [
+            'scope' => 'default',
+            'scope_id' => 0,
+            'path' => 'decorates/installments_fees/installments_fees_enable',
+            'value' => '0'
+        ];
+        $this->setup->getConnection()
+            ->insertOnDuplicate($this->setup->getTable('core_config_data'), $data, ['value']);
+
+        $data = [
+            'scope' => 'default',
+            'scope_id' => 0,
+            'path' => 'decorates/general/run_script',
+            'value' => '1'
+        ];
+        $this->setup->getConnection()
+            ->insertOnDuplicate($this->setup->getTable('core_config_data'), $data, ['value']);
     }
 }
