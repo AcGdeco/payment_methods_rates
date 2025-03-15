@@ -7,15 +7,19 @@ use Magento\Eav\Setup\EavSetupFactory;
 use Magento\Framework\Setup\InstallDataInterface;
 use Magento\Framework\Setup\ModuleContextInterface;
 use Magento\Framework\Setup\ModuleDataSetupInterface;
+use Magento\Framework\App\Config\Storage\WriterInterface;
 
 class InstallData implements InstallDataInterface
 {
     private $eavSetupFactory;
+    private $configWriter;
 
     public function __construct(
-        EavSetupFactory $eavSetupFactory
+        EavSetupFactory $eavSetupFactory,
+        WriterInterface $configWriter
     ) {
         $this->eavSetupFactory = $eavSetupFactory;
+        $this->configWriter = $configWriter;
     }
 
     public function install(ModuleDataSetupInterface $setup, ModuleContextInterface $context)
@@ -106,7 +110,7 @@ class InstallData implements InstallDataInterface
                 'apply_to' => 'simple,configurable,virtual,bundle,downloadable'
             ]
         );
-        
+
         $eavSetup->updateAttribute(
             \Magento\Catalog\Model\Product::ENTITY,
             'price',
@@ -114,31 +118,29 @@ class InstallData implements InstallDataInterface
             false
         );
 
-        $data = [
-            'scope' => 'default',
-            'scope_id' => 0,
-            'path' => 'decorates/general/enable',
-            'value' => '0'
-        ];
-        $eavSetup->getConnection()
-            ->insertOnDuplicate($this->setup->getTable('core_config_data'), $data, ['value']);
+        $setup->startSetup();
 
-        $data = [
-            'scope' => 'default',
-            'scope_id' => 0,
-            'path' => 'decorates/installments_fees/installments_fees_enable',
-            'value' => '0'
-        ];
-        $eavSetup->getConnection()
-            ->insertOnDuplicate($this->setup->getTable('core_config_data'), $data, ['value']);
+        $this->configWriter->save(
+            'decorates/general/enable',
+            0,
+            \Magento\Framework\App\Config\ScopeConfigInterface::SCOPE_TYPE_DEFAULT,
+            0
+        );
 
-        $data = [
-            'scope' => 'default',
-            'scope_id' => 0,
-            'path' => 'decorates/general/run_script',
-            'value' => '1'
-        ];
-        $eavSetup->getConnection()
-            ->insertOnDuplicate($this->setup->getTable('core_config_data'), $data, ['value']);
+        $this->configWriter->save(
+            'decorates/installments_fees/installments_fees_enable',
+            0,
+            \Magento\Framework\App\Config\ScopeConfigInterface::SCOPE_TYPE_DEFAULT,
+            0
+        );
+
+        $this->configWriter->save(
+            'decorates/general/run_script',
+            1,
+            \Magento\Framework\App\Config\ScopeConfigInterface::SCOPE_TYPE_DEFAULT,
+            0
+        );
+
+        $setup->endSetup();
     }
 }
