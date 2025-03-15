@@ -120,7 +120,7 @@ class InstallData implements InstallDataInterface
             'path' => 'decorates/general/enable',
             'value' => '0'
         ];
-        $this->setup->getConnection()
+        $eavSetup->getConnection()
             ->insertOnDuplicate($this->setup->getTable('core_config_data'), $data, ['value']);
 
         $data = [
@@ -129,7 +129,7 @@ class InstallData implements InstallDataInterface
             'path' => 'decorates/installments_fees/installments_fees_enable',
             'value' => '0'
         ];
-        $this->setup->getConnection()
+        $eavSetup->getConnection()
             ->insertOnDuplicate($this->setup->getTable('core_config_data'), $data, ['value']);
 
         $data = [
@@ -138,7 +138,7 @@ class InstallData implements InstallDataInterface
             'path' => 'decorates/general/run_script',
             'value' => '1'
         ];
-        $this->setup->getConnection()
+        $eavSetup->getConnection()
             ->insertOnDuplicate($this->setup->getTable('core_config_data'), $data, ['value']);
     }
 }
