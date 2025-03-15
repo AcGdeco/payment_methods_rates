@@ -107,8 +107,7 @@ class InstallData implements InstallDataInterface
                 'used_in_product_listing' => true,
                 'used_for_sort_by' => true,
                 'unique' => false,
-                'apply_to' => 'simple,configurable,virtual,bundle,downloadable',
-                'frontend_label[1]' => 'Preço'
+                'apply_to' => 'simple,configurable,virtual,bundle,downloadable'
             ]
         );
 
@@ -117,6 +116,13 @@ class InstallData implements InstallDataInterface
             'price',
             'used_for_sort_by',
             false
+        );
+
+        $eavSetup->updateAttribute(
+            \Magento\Catalog\Model\Product::ENTITY,
+            'preco_total',
+            'frontend_label[1]',
+            'Preço'
         );
 
         $setup->startSetup();
