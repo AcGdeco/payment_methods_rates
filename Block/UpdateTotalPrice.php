@@ -35,6 +35,11 @@ class UpdateTotalPrice extends Template
 
     public function changeValueRunScript()
     {
-        $this->configWriter->save('decorates/general/run_script', '0');
+        $this->configWriter->save(
+            'decorates/general/run_script',
+            0,
+            \Magento\Framework\App\Config\ScopeConfigInterface::SCOPE_TYPE_DEFAULT,
+            0
+        );
     }
 }

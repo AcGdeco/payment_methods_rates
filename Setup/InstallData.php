@@ -89,7 +89,7 @@ class InstallData implements InstallDataInterface
                 'type' => 'decimal',
                 'backend' => '',
                 'frontend' => '',
-                'label' => 'Preço Total (preenche automaticamente)',
+                'label' => 'Preço',
                 'input' => 'price',
                 'class' => '',
                 'source' => '',
@@ -117,15 +117,6 @@ class InstallData implements InstallDataInterface
             'used_for_sort_by',
             false
         );
-
-        $labels = array();
-        $labels[0] = 'Age';
-        $labels[1] = 'Label for store with id 1';
-        $oAttribute = Mage::getSingleton('eav/config')->getAttribute(\Magento\Catalog\Model\Product::ENTITY, 'preco_total');
-        $oAttribute->setData('store_labels', $labels);
-        $oAttribute->save();
-
-        $setup->startSetup();
 
         $this->configWriter->save(
             'decorates/general/enable',
