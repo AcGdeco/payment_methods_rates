@@ -7,6 +7,7 @@ use Magento\Framework\View\Element\Template;
 use Magento\Catalog\Model\ResourceModel\Product\CollectionFactory;
 use Magento\Framework\App\Config\Storage\WriterInterface;
 use Magento\Framework\Setup\ModuleDataSetupInterface;
+use Magento\Framework\App\Config\ScopeConfigInterface;
 
 class UpdateTotalPrice extends Template
 {
@@ -41,12 +42,10 @@ class UpdateTotalPrice extends Template
     {
         $this->setup->startSetup();
 
-        $this->configWriter->save(
-            'decorates/general/run_script',
-            0,
-            \Magento\Framework\App\Config\ScopeConfigInterface::SCOPE_TYPE_DEFAULT,
-            0
-        );
+        $path = 'decorates/general/run_script';
+        $value = 0;
+
+        $this->configWriter->save($path, $value, $scope = ScopeConfigInterface::SCOPE_TYPE_DEFAULT, $scopeId = 0);
 
         $this->setup->endSetup();
     }

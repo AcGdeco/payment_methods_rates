@@ -1,0 +1,32 @@
+.admin__field-control:has(input[name="product[preco_total]"]) {
+    &::after {      
+        content: 'Preço total calculado automaticamente ao salvar o produto';
+        bottom: -1.3rem;
+        color: #808080;
+        font-size: 1.1rem;
+        font-weight: 400;
+        min-width: 15rem;
+    }
+    .admin__control-addon:has(input[name="product[preco_total]"]) {
+        position: relative;
+
+        &::before {
+            background-color: #e9e9e9;
+            content: '';
+            color: #303030;
+            opacity: 0.5;
+            position: absolute;
+            top: 0px;
+            left: 0px;
+            width: 100%;
+            height: 100%;
+            z-index: 1;
+        }
+
+        input[name="product[preco_total]"] {
+            cursor: not-allowed;
+            color: #303030;
+            z-index: 0;
+        }
+    }
+}
