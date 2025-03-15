@@ -118,6 +118,8 @@ class InstallData implements InstallDataInterface
             false
         );
 
+        $setup->startSetup();
+
         $this->configWriter->save(
             'decorates/general/enable',
             0,
