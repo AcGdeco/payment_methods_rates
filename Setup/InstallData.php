@@ -107,12 +107,7 @@ class InstallData implements InstallDataInterface
                 'used_in_product_listing' => true,
                 'used_for_sort_by' => true,
                 'unique' => false,
-                'apply_to' => 'simple,configurable,virtual,bundle,downloadable',
-                'store_labels' => [
-                    0 => 'Preço Total (Default)',
-                    1 => 'Total Price (English)',
-                    2 => 'Precio Total (Espanhol)',
-                ]
+                'apply_to' => 'simple,configurable,virtual,bundle,downloadable'
             ]
         );
 
@@ -123,12 +118,12 @@ class InstallData implements InstallDataInterface
             false
         );
 
-        $eavSetup->updateAttribute(
-            \Magento\Catalog\Model\Product::ENTITY,
-            'preco_total',
-            'frontend_label[1]',
-            'Preço'
-        );
+        $labels = array();
+        $labels[0] = 'Age';
+        $labels[1] = 'Label for store with id 1';
+        $oAttribute = Mage::getSingleton('eav/config')->getAttribute(\Magento\Catalog\Model\Product::ENTITY, 'preco_total');
+        $oAttribute->setData('store_labels', $labels);
+        $oAttribute->save();
 
         $setup->startSetup();
 
