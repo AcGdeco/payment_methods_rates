@@ -22,6 +22,21 @@ class Data extends \Magento\Framework\App\Helper\AbstractHelper
         $this->urlInterface = $urlInterface;
     }
 
+    public function setProductPrice()
+    {
+        $product = $observer->getData('product');
+        $taxaProduto = $product->getData('taxa_produto') || $product->getData('taxa_produto') == 0 ? $product->getData('taxa_produto') : null;
+        $freteFornecedor = $product->getData('frete_fornecedor') ? $product->getData('frete_fornecedor') : null;
+        $precoFornecedor = $product->getData('preco_fornecedor') ? $product->getData('preco_fornecedor') : null;
+        $preco = $this->helperData->getTotalPercentageRatePrice($precoFornecedor, $taxaProduto, $freteFornecedor);
+        $product->setPrice($preco);
+
+        if($product->getPrecoEspecial() != null && $product->getPrecoEspecial() != ""){
+            $specialPrice = $this->helperData->getTotalPercentageRatePrice($product->getPrecoEspecial(), $taxaProduto, $freteFornecedor);
+            $product->setSpecialPrice($specialPrice);
+        }
+    }
+
     public function getIfRestV1ProductsAPI()
     {
         $urlBase = $this->storeManager->getStore()->getBaseUrl();
@@ -63,10 +78,26 @@ class Data extends \Magento\Framework\App\Helper\AbstractHelper
 
     public function getProductPercentageRate()
     {
-        return $this->scopeConfig->getValue(
-            'decorates/general/product_rate_percentage',
-            \Magento\Store\Model\ScopeInterface::SCOPE_STORE
-        );
+        $productRatePercentage = [
+            $this->scopeConfig->getValue(
+                'decorates/general/product_rate_percentage_1',
+                \Magento\Store\Model\ScopeInterface::SCOPE_STORE
+            ),
+            $this->scopeConfig->getValue(
+                'decorates/general/product_rate_percentage_2',
+                \Magento\Store\Model\ScopeInterface::SCOPE_STORE
+            ),
+            $this->scopeConfig->getValue(
+                'decorates/general/product_rate_percentage_3',
+                \Magento\Store\Model\ScopeInterface::SCOPE_STORE
+            ),
+            $this->scopeConfig->getValue(
+                'decorates/general/product_rate_percentage_4',
+                \Magento\Store\Model\ScopeInterface::SCOPE_STORE
+            )
+        ];
+        
+        return $productRatePercentage;
     }
 
     public function getUnalterableProductPercentageRate()

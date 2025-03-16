@@ -39,7 +39,7 @@ class InstallData implements InstallDataInterface
                 'source' => '',
                 'global' => \Magento\Eav\Model\Entity\Attribute\ScopedAttributeInterface::SCOPE_GLOBAL,
                 'group' => 'General',
-                'sort_order' => 4.8,
+                'sort_order' => 4.9,
                 'visible' => true,
                 'required' => false,
                 'user_defined' => true,
@@ -136,6 +136,33 @@ class InstallData implements InstallDataInterface
                 'used_for_sort_by' => false,
                 'unique' => false,
                 'apply_to' => 'simple,configurable,virtual,bundle,downloadable'
+            ]
+        );
+
+        $eavSetup->addAttribute(
+            \Magento\Catalog\Model\Product::ENTITY,
+            'taxa_select',
+            [
+                'type' => 'varchar',
+                'label' => 'Taxa',
+                'input' => 'select',
+                'source' => \Magento\Eav\Model\Entity\Attribute\Source\Table::class,
+                'global' => \Magento\Eav\Model\Entity\Attribute\ScopedAttributeInterface::SCOPE_GLOBAL,
+                'group' => 'General',
+                'visible' => true,
+                'required' => false,
+                'user_defined' => true,
+                'default' => '',
+                'searchable' => false,
+                'filterable' => false,
+                'comparable' => false,
+                'visible_on_front' => false,
+                'used_in_product_listing' => true,
+                'used_for_sort_by' => false,
+                'unique' => false,
+                'apply_to' => 'simple,configurable,virtual,bundle,downloadable',
+                'sort_order' => 4.8,
+                'option' => ['values' => ['Taxa 1', 'Taxa 2', 'Taxa 3', 'Taxa 4']]
             ]
         );
 
