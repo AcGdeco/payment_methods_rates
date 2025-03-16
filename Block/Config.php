@@ -25,7 +25,6 @@ class Config extends Template
             "installmentsFeesEnable" => $this->helperData->getInstallmentsFeesEnable(),
             "percentageRate" => $this->helperData->getPercentageRate(),
             "productPercentageRate" => $this->helperData->getProductPercentageRate(),
-            "unalterableProductPercentageRate" => $this->helperData->getUnalterableProductPercentageRate(),
             "numericalRate" => $this->helperData->getNumericalRate(),
             "installmentsFees" => $this->helperData->getInstallmentsFees()
         ];
