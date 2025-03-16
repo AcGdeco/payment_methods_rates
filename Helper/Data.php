@@ -22,19 +22,19 @@ class Data extends \Magento\Framework\App\Helper\AbstractHelper
         $this->urlInterface = $urlInterface;
     }
 
-    public function getIfSaveProductAPI()
+    public function getIfRestV1ProductsAPI()
     {
         $urlBase = $this->storeManager->getStore()->getBaseUrl();
         $urlCall = $this->urlInterface->getCurrentUrl();
-        $substring = $urlBase."rest/async/bulk/V1/products";
+        $substring = $urlBase."rest/V1/products";
 
         if (strpos($urlCall, $substring) !== false) {
-            $isSaveProductAPI = true;
+            $isRestV1ProductsAPI = true;
         } else {
-            $isSaveProductAPI = false;
+            $isRestV1ProductsAPI = false;
         }
 
-        return $isSaveProductAPI;
+        return $isRestV1ProductsAPI;
     }
 
     public function getEnable()
