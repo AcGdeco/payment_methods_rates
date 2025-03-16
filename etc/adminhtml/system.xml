@@ -31,7 +31,7 @@
                 <field id="product_rate_percentage_1" translate="label" type="text" sortOrder="1" showInDefault="1" showInWebsite="0" showInStore="0">
                     <label>Product Percentage Rate 1</label>
                     <validate>validate-number</validate>
-                    <comment>Applied to product prices (Direct calculation). This value is replaced by the Product Fee, if defined, located on the product creation/editing page.</comment>
+                    <comment>Applied to product prices (Direct calculation).</comment>
                     <depends>
                         <field id="enable">1</field>
                     </depends>
@@ -39,7 +39,7 @@
                 <field id="product_rate_percentage_2" translate="label" type="text" sortOrder="1" showInDefault="1" showInWebsite="0" showInStore="0">
                     <label>Product Percentage Rate 2</label>
                     <validate>validate-number</validate>
-                    <comment>Applied to product prices (Direct calculation). This value is replaced by the Product Fee, if defined, located on the product creation/editing page.</comment>
+                    <comment>Applied to product prices (Direct calculation).</comment>
                     <depends>
                         <field id="enable">1</field>
                     </depends>
@@ -47,7 +47,7 @@
                 <field id="product_rate_percentage_3" translate="label" type="text" sortOrder="1" showInDefault="1" showInWebsite="0" showInStore="0">
                     <label>Product Percentage Rate 3</label>
                     <validate>validate-number</validate>
-                    <comment>Applied to product prices (Direct calculation). This value is replaced by the Product Fee, if defined, located on the product creation/editing page.</comment>
+                    <comment>Applied to product prices (Direct calculation).</comment>
                     <depends>
                         <field id="enable">1</field>
                     </depends>
@@ -55,13 +55,13 @@
                 <field id="product_rate_percentage_4" translate="label" type="text" sortOrder="1" showInDefault="1" showInWebsite="0" showInStore="0">
                     <label>Product Percentage Rate 4</label>
                     <validate>validate-number</validate>
-                    <comment>Applied to product prices (Direct calculation). This value is replaced by the Product Fee, if defined, located on the product creation/editing page.</comment>
+                    <comment>Applied to product prices (Direct calculation).</comment>
                     <depends>
                         <field id="enable">1</field>
                     </depends>
                 </field>
-                <field id="unalterable_product_rate_percentage" translate="label" type="text" sortOrder="1" showInDefault="1" showInWebsite="0" showInStore="0">
-                    <label>Unalterable Product Percentage Rate</label>
+                <field id="product_rate_percentage_5" translate="label" type="text" sortOrder="1" showInDefault="1" showInWebsite="0" showInStore="0">
+                    <label>Product Percentage Rate 5</label>
                     <validate>validate-number</validate>
                     <comment>Applied to product prices (Direct calculation).</comment>
                     <depends>

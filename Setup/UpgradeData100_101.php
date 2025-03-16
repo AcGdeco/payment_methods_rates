@@ -42,7 +42,7 @@ class UpgradeData100_101 implements UpgradeDataInterface
                 'unique' => false,
                 'apply_to' => 'simple,configurable,virtual,bundle,downloadable',
                 'sort_order' => 4.8,
-                'option' => ['values' => ['Taxa 1', 'Taxa 2', 'Taxa 3', 'Taxa 4']]
+                'option' => ['values' => ['Taxa 1', 'Taxa 2', 'Taxa 3', 'Taxa 4', 'Taxa 5']]
             ]
         );
     }

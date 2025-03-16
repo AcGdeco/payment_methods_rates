@@ -36,6 +36,9 @@ class Data extends \Magento\Framework\App\Helper\AbstractHelper
         if($taxaSelect == 'Taxa 4'){
             $taxaSelect = 4;
         }
+        if($taxaSelect == 'Taxa 5'){
+            $taxaSelect = 5;
+        }
 
         return $taxaSelect;
     }
@@ -112,18 +115,14 @@ class Data extends \Magento\Framework\App\Helper\AbstractHelper
             $this->scopeConfig->getValue(
                 'decorates/general/product_rate_percentage_4',
                 \Magento\Store\Model\ScopeInterface::SCOPE_STORE
+            ),
+            $this->scopeConfig->getValue(
+                'decorates/general/product_rate_percentage_5',
+                \Magento\Store\Model\ScopeInterface::SCOPE_STORE
             )
         ];
         
         return $productRatePercentage;
-    }
-
-    public function getUnalterableProductPercentageRate()
-    {
-        return $this->scopeConfig->getValue(
-            'decorates/general/unalterable_product_rate_percentage',
-            \Magento\Store\Model\ScopeInterface::SCOPE_STORE
-        );
     }
 
     public function getNumericalRate()
@@ -149,24 +148,20 @@ class Data extends \Magento\Framework\App\Helper\AbstractHelper
     public function getTotalPercentageRatePrice($price, $taxaProduto, $freteFornecedor, $taxaSelect)
     {
         
-        $ratePrice = $price;
         if($price != 0){
             if($freteFornecedor != null){
-                $ratePrice = $ratePrice + $freteFornecedor;
+                $totalPrice = $price + $freteFornecedor;
+                $ratePrice = $totalPrice;
             }
             if($taxaProduto != null) {
                 $ratePrice = $ratePrice + $ratePrice * $taxaProduto / 100;
-            } else if(!empty($taxaSelect)){
+            }
+            if(!empty($taxaSelect)){
                 $productPercentageRate = $this->getProductPercentageRate();
 
                 if(!empty($productPercentageRate[$taxaSelect-1])){
-                    $ratePrice = $ratePrice + $ratePrice * $productPercentageRate[$taxaSelect - 1] / 100;
+                    $ratePrice = $ratePrice + $totalPrice * $productPercentageRate[$taxaSelect - 1] / 100;
                 }
-            }
-            if(!empty($this->getUnalterableProductPercentageRate())) {
-                $unalterableProductPercentageRate = $this->getUnalterableProductPercentageRate();
-                $rateUnalterablePrice = $price * $unalterableProductPercentageRate / 100;
-                $ratePrice = $ratePrice + $rateUnalterablePrice;
             }
             if(!empty($this->getPercentageRate())) {
                 $percentageRate = $this->getPercentageRate();
