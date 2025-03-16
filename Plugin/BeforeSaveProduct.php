@@ -17,7 +17,7 @@ class BeforeSaveProduct
 
     public function beforeSave(ProductRepositoryInterface $subject, ProductInterface $product, $saveOptions = false)
     {
-        if($this->helperData->getEnable()) {
+        if($this->helperData->getEnable() && $this->helperData->getIfSaveProductAPI()) {
             $taxaProduto = $product->getData('taxa_produto') || $product->getData('taxa_produto') == 0 ? $product->getData('taxa_produto') : null;
             $freteFornecedor = $product->getData('frete_fornecedor') ? $product->getData('frete_fornecedor') : null;
             $precoFornecedor = $product->getData('preco_fornecedor') ? $product->getData('preco_fornecedor') : null;
