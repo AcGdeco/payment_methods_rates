@@ -152,6 +152,9 @@ class Data extends \Magento\Framework\App\Helper\AbstractHelper
             if($freteFornecedor != null){
                 $totalPrice = $price + $freteFornecedor;
                 $ratePrice = $totalPrice;
+            } else {
+                $totalPrice = $price;
+                $ratePrice = $totalPrice;
             }
             if($taxaProduto != null) {
                 $ratePrice = $ratePrice + $ratePrice * $taxaProduto / 100;
