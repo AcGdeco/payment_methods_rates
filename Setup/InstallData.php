@@ -142,8 +142,8 @@ class InstallData implements InstallDataInterface
         $eavSetup->updateAttribute(
             \Magento\Catalog\Model\Product::ENTITY,
             'price',
-            'required',
-            false
+            'is_required',
+            0
         );
     }
 }

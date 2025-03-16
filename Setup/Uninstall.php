@@ -48,8 +48,8 @@ class Uninstall implements UninstallInterface
         $eavSetup->updateAttribute(
             \Magento\Catalog\Model\Product::ENTITY,
             'price',
-            'required',
-            true
+            'is_required',
+            1
         );
     }
 }
