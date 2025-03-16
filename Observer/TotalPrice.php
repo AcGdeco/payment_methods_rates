@@ -18,7 +18,7 @@ class TotalPrice implements ObserverInterface
         \Magento\Framework\Event\Observer $observer
     ) {
         if($this->helperData->getEnable()) {
-            $this->helperData->setProductPrice();
+            $this->helperData->setProductPrice($observer->getData('product'));
         }
     }
 }

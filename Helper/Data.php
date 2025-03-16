@@ -22,17 +22,35 @@ class Data extends \Magento\Framework\App\Helper\AbstractHelper
         $this->urlInterface = $urlInterface;
     }
 
-    public function setProductPrice()
+    public function getTaxaSelect($taxaSelect)
     {
-        $product = $observer->getData('product');
+        if($taxaSelect == 'Taxa 1'){
+            $taxaSelect = 1;
+        }
+        if($taxaSelect == 'Taxa 2'){
+            $taxaSelect = 2;
+        }
+        if($taxaSelect == 'Taxa 3'){
+            $taxaSelect = 3;
+        }
+        if($taxaSelect == 'Taxa 4'){
+            $taxaSelect = 4;
+        }
+
+        return $taxaSelect;
+    }
+
+    public function setProductPrice($product)
+    {
         $taxaProduto = $product->getData('taxa_produto') || $product->getData('taxa_produto') == 0 ? $product->getData('taxa_produto') : null;
+        $taxaSelect = $this->getTaxaSelect($product->getAttributeText('taxa_select'));
         $freteFornecedor = $product->getData('frete_fornecedor') ? $product->getData('frete_fornecedor') : null;
         $precoFornecedor = $product->getData('preco_fornecedor') ? $product->getData('preco_fornecedor') : null;
-        $preco = $this->helperData->getTotalPercentageRatePrice($precoFornecedor, $taxaProduto, $freteFornecedor);
+        $preco = $this->getTotalPercentageRatePrice($precoFornecedor, $taxaProduto, $freteFornecedor, $taxaSelect);
         $product->setPrice($preco);
 
         if($product->getPrecoEspecial() != null && $product->getPrecoEspecial() != ""){
-            $specialPrice = $this->helperData->getTotalPercentageRatePrice($product->getPrecoEspecial(), $taxaProduto, $freteFornecedor);
+            $specialPrice = $this->getTotalPercentageRatePrice($product->getPrecoEspecial(), $taxaProduto, $freteFornecedor, $taxaSelect);
             $product->setSpecialPrice($specialPrice);
         }
     }
@@ -128,7 +146,7 @@ class Data extends \Magento\Framework\App\Helper\AbstractHelper
         return $installementsFees;
     }
 
-    public function getTotalPercentageRatePrice($price, $taxaProduto, $freteFornecedor)
+    public function getTotalPercentageRatePrice($price, $taxaProduto, $freteFornecedor, $taxaSelect)
     {
         
         $ratePrice = $price;
@@ -138,9 +156,12 @@ class Data extends \Magento\Framework\App\Helper\AbstractHelper
             }
             if($taxaProduto != null) {
                 $ratePrice = $ratePrice + $ratePrice * $taxaProduto / 100;
-            } else if(!empty($this->getProductPercentageRate())){
+            } else if(!empty($taxaSelect)){
                 $productPercentageRate = $this->getProductPercentageRate();
-                $ratePrice = $ratePrice + $ratePrice * $productPercentageRate / 100;
+
+                if(!empty($productPercentageRate[$taxaSelect-1])){
+                    $ratePrice = $ratePrice + $ratePrice * $productPercentageRate[$taxaSelect - 1] / 100;
+                }
             }
             if(!empty($this->getUnalterableProductPercentageRate())) {
                 $unalterableProductPercentageRate = $this->getUnalterableProductPercentageRate();

@@ -18,7 +18,7 @@ class BeforeSaveProduct
     public function beforeSave(ProductRepositoryInterface $subject, ProductInterface $product, $saveOptions = false)
     {
         if($this->helperData->getEnable() && !$this->helperData->getIfRestV1ProductsAPI()) {
-            $this->helperData->setProductPrice();
+            $this->helperData->setProductPrice($product);
         }
 
         return [$product, $saveOptions];
