@@ -22,6 +22,37 @@ class Data extends \Magento\Framework\App\Helper\AbstractHelper
         $this->urlInterface = $urlInterface;
     }
 
+    public function getCompareValuesConfig($groups)
+    {
+        $productRatePercentage = $this->getProductPercentageRate();
+        $percentageRate = $this->getPercentageRate();
+
+        $isDifferent = false;
+        if(
+            $productRatePercentage[0] != $groups['general']['fields']['product_rate_percentage_1']['value'] ||
+            $productRatePercentage[1] != $groups['general']['fields']['product_rate_percentage_2']['value'] ||
+            $productRatePercentage[2] != $groups['general']['fields']['product_rate_percentage_3']['value'] ||
+            $productRatePercentage[3] != $groups['general']['fields']['product_rate_percentage_4']['value'] ||
+            $productRatePercentage[4] != $groups['general']['fields']['product_rate_percentage_5']['value']
+        ){
+            $isDifferent = true;
+        }
+        
+        $percentageRateOld = false;
+        if(!array_key_exists('value', $groups['general']['fields']['rate_percentage'])) {
+            $percentageRateOld = $percentageRate;
+        }
+
+        if(
+            array_key_exists('value', $groups['general']['fields']['rate_percentage']) &&
+            $percentageRate != $groups['general']['fields']['rate_percentage']['value']
+        ){
+            $isDifferent = true;
+        }
+
+        return [$isDifferent, $percentageRateOld];
+    }
+
     public function getTaxaSelect($taxaSelect)
     {
         if($taxaSelect == 'Taxa 1'){
@@ -58,19 +89,18 @@ class Data extends \Magento\Framework\App\Helper\AbstractHelper
         }
     }
 
-    public function getIfRestV1ProductsAPI()
-    {
+    public function getCompareURL($path) {
         $urlBase = $this->storeManager->getStore()->getBaseUrl();
         $urlCall = $this->urlInterface->getCurrentUrl();
-        $substring = $urlBase."rest/V1/products";
+        $substring = $urlBase.$path;
 
         if (strpos($urlCall, $substring) !== false) {
-            $isRestV1ProductsAPI = true;
+            $result = true;
         } else {
-            $isRestV1ProductsAPI = false;
+            $result = false;
         }
 
-        return $isRestV1ProductsAPI;
+        return $result;
     }
 
     public function getEnable()
@@ -147,7 +177,7 @@ class Data extends \Magento\Framework\App\Helper\AbstractHelper
 
     public function getTotalPercentageRatePrice($price, $taxaProduto, $freteFornecedor, $taxaSelect)
     {
-        
+        $ratePrice = 0;
         if($price != 0){
             if($freteFornecedor != null){
                 $totalPrice = $price + $freteFornecedor;

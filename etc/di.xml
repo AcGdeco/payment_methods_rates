@@ -5,9 +5,12 @@
         <plugin name="shipping_rate" type="Deco\Rates\Plugin\Shipping" sortOrder="10"/>
     </type>
     <type name="PagBank\PaymentMagento\Model\Api\ConsultPSInstallments">
-        <plugin name="pagbank_installments_plugin" type="Deco\Rates\Plugin\ConsultPSInstallmentsGetPagBankInstallmentsPlugin" sortOrder="40" />
+        <plugin name="pagbank_installments_plugin" type="Deco\Rates\Plugin\ConsultPSInstallmentsGetPagBankInstallmentsPlugin" sortOrder="20" />
     </type>
     <type name="Magento\Catalog\Api\ProductRepositoryInterface">
-        <plugin name="deco_rates_product_repository_plugin" type="Deco\Rates\Plugin\BeforeSaveProduct"/>
+        <plugin name="deco_rates_product_repository_plugin" type="Deco\Rates\Plugin\BeforeSaveProduct" sortOrder="30" />
+    </type>
+    <type name="Magento\Config\Model\Config">
+        <plugin name="deco_rates_config_backend_plugin" type="Deco\Rates\Plugin\ConfigBackend" sortOrder="40" />
     </type>
 </config>
