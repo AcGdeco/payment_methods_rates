@@ -86,6 +86,8 @@ class Data extends \Magento\Framework\App\Helper\AbstractHelper
         if($product->getPrecoEspecial() != null && $product->getPrecoEspecial() != ""){
             $specialPrice = $this->getTotalPercentageRatePrice($product->getPrecoEspecial(), $taxaProduto, $freteFornecedor, $taxaSelect);
             $product->setSpecialPrice($specialPrice);
+        } else {
+            $product->setSpecialPrice();
         }
     }
 
