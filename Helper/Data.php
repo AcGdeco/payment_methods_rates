@@ -24,18 +24,25 @@ class Data extends \Magento\Framework\App\Helper\AbstractHelper
 
     public function getCompareValuesConfig($groups)
     {
-        $productRatePercentage = $this->getProductPercentageRate();
+        $productPercentageRate = $this->getProductPercentageRate();
         $percentageRate = $this->getPercentageRate();
-
+        $generalPercentageRate = $this->getGeneralPercentageRate();
         $isDifferent = false;
-        if(
-            $productRatePercentage[0] != $groups['general']['fields']['product_rate_percentage_1']['value'] ||
-            $productRatePercentage[1] != $groups['general']['fields']['product_rate_percentage_2']['value'] ||
-            $productRatePercentage[2] != $groups['general']['fields']['product_rate_percentage_3']['value'] ||
-            $productRatePercentage[3] != $groups['general']['fields']['product_rate_percentage_4']['value'] ||
-            $productRatePercentage[4] != $groups['general']['fields']['product_rate_percentage_5']['value']
-        ){
-            $isDifferent = true;
+        $ratesToUpdate = [];
+        $updateAll = false;
+
+        for($i = 0; $i < count($productPercentageRate); $i++){
+            if($productPercentageRate[$i] != $groups['general']['fields']['product_rate_percentage_'.$i+1]['value']){
+                $isDifferent = true;
+                $ratesToUpdate[] = $i + 1;
+            }
+        }
+
+        for($i = 0; $i < count($generalPercentageRate); $i++){
+            if($generalPercentageRate[$i] != $groups['general']['fields']['general_rate_percentage_'.$i+1]['value']){
+                $isDifferent = true;
+                $updateAll = true;
+            }
         }
         
         $percentageRateOld = false;
@@ -48,9 +55,10 @@ class Data extends \Magento\Framework\App\Helper\AbstractHelper
             $percentageRate != $groups['general']['fields']['rate_percentage']['value']
         ){
             $isDifferent = true;
+            $updateAll = true;
         }
 
-        return [$isDifferent, $percentageRateOld];
+        return [$isDifferent, $percentageRateOld, $updateAll, $ratesToUpdate];
     }
 
     public function getTaxaSelect($taxaSelect)
@@ -129,6 +137,22 @@ class Data extends \Magento\Framework\App\Helper\AbstractHelper
         );
     }
 
+    public function getGeneralPercentageRate()
+    {
+        $productRatePercentage = [
+            $this->scopeConfig->getValue(
+                'decorates/general/general_rate_percentage_1',
+                \Magento\Store\Model\ScopeInterface::SCOPE_STORE
+            ),
+            $this->scopeConfig->getValue(
+                'decorates/general/general_rate_percentage_2',
+                \Magento\Store\Model\ScopeInterface::SCOPE_STORE
+            )
+        ];
+        
+        return $productRatePercentage;
+    }
+
     public function getProductPercentageRate()
     {
         $productRatePercentage = [
@@ -188,9 +212,18 @@ class Data extends \Magento\Framework\App\Helper\AbstractHelper
                 $totalPrice = $price;
                 $ratePrice = $totalPrice;
             }
+
             if($taxaProduto != null) {
                 $ratePrice = $ratePrice + $ratePrice * $taxaProduto / 100;
             }
+
+            $generalPercentageRate = $this->getGeneralPercentageRate();
+            for($i = 0; $i < count($generalPercentageRate); $i++){
+                if($generalPercentageRate[$i] != null) {
+                    $ratePrice = $ratePrice + $totalPrice * $generalPercentageRate[$i] / 100;
+                }
+            }
+
             if(!empty($taxaSelect)){
                 $productPercentageRate = $this->getProductPercentageRate();
 
@@ -198,9 +231,12 @@ class Data extends \Magento\Framework\App\Helper\AbstractHelper
                     $ratePrice = $ratePrice + $totalPrice * $productPercentageRate[$taxaSelect - 1] / 100;
                 }
             }
+
             if(!empty($this->getPercentageRate())) {
                 $percentageRate = $this->getPercentageRate();
-                $ratePrice = $ratePrice / (1 - ($percentageRate / 100));
+                if($percentageRate != 0){
+                    $ratePrice = $ratePrice / (1 - ($percentageRate / 100));
+                }
             }
         }
         return $ratePrice;

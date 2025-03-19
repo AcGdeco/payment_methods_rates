@@ -59,10 +59,10 @@ class ConfigBackend
         if($this->section == 'decorates'){
             $compareResult = $this->compareResult;
             if($compareResult[0] == true){
-                $this->updateTotalPrice->changeTotalPriceProductsValues();
+                $this->updateTotalPrice->changeTotalPriceProductsValues($compareResult[2], $compareResult[3]);
             } else {
                 if($compareResult[1] != false && $compareResult[1] != $this->helperData->getPercentageRate()) {
-                    $this->updateTotalPrice->changeTotalPriceProductsValues();
+                    $this->updateTotalPrice->changeTotalPriceProductsValues(true, $compareResult[3]);
                 }
             }
         }

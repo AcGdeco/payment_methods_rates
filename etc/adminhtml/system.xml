@@ -11,6 +11,7 @@
                 <field id="enable" translate="label" type="select" sortOrder="1" showInDefault="1" showInWebsite="0" showInStore="0">
                     <label>Module Enable</label>
                     <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                    <comment>The price of all products will be modified when you change the rates and save the settings. It may take some time to save.</comment>
                 </field>
                 <field id="rate_percentage" translate="label" type="text" sortOrder="1" showInDefault="1" showInWebsite="0" showInStore="0" canRestore="1">
                     <label>Percentage Rate</label>
@@ -28,42 +29,58 @@
                         <field id="enable">1</field>
                     </depends>
                 </field>
-                <field id="product_rate_percentage_1" translate="label" type="text" sortOrder="1" showInDefault="1" showInWebsite="0" showInStore="0">
-                    <label>Product Percentage Rate 1</label>
+                <field id="general_rate_percentage_1" translate="label" type="text" sortOrder="1" showInDefault="1" showInWebsite="0" showInStore="0">
+                    <label>General Percentage Rate 1</label>
                     <validate>validate-number</validate>
-                    <comment>Applied to product prices (Direct calculation).</comment>
+                    <comment>Applied to all product prices (Direct calculation).</comment>
+                    <depends>
+                        <field id="enable">1</field>
+                    </depends>
+                </field>
+                <field id="general_rate_percentage_2" translate="label" type="text" sortOrder="1" showInDefault="1" showInWebsite="0" showInStore="0">
+                    <label>General Percentage Rate 2</label>
+                    <validate>validate-number</validate>
+                    <comment>Applied to all product prices (Direct calculation).</comment>
+                    <depends>
+                        <field id="enable">1</field>
+                    </depends>
+                </field>
+                <field id="product_rate_percentage_1" translate="label" type="text" sortOrder="1" showInDefault="1" showInWebsite="0" showInStore="0">
+                    <label>Percentage Rate 1</label>
+                    <validate>validate-number</validate>
+                    <comment>Applied to product prices (Direct calculation). This rate must be selected on the product creation/editing page.</comment>
                     <depends>
                         <field id="enable">1</field>
                     </depends>
                 </field>
                 <field id="product_rate_percentage_2" translate="label" type="text" sortOrder="1" showInDefault="1" showInWebsite="0" showInStore="0">
-                    <label>Product Percentage Rate 2</label>
+                    <label>Percentage Rate 2</label>
                     <validate>validate-number</validate>
-                    <comment>Applied to product prices (Direct calculation).</comment>
+                    <comment>Applied to product prices (Direct calculation). This rate must be selected on the product creation/editing page.</comment>
                     <depends>
                         <field id="enable">1</field>
                     </depends>
                 </field>
                 <field id="product_rate_percentage_3" translate="label" type="text" sortOrder="1" showInDefault="1" showInWebsite="0" showInStore="0">
-                    <label>Product Percentage Rate 3</label>
+                    <label>Percentage Rate 3</label>
                     <validate>validate-number</validate>
-                    <comment>Applied to product prices (Direct calculation).</comment>
+                    <comment>Applied to product prices (Direct calculation). This rate must be selected on the product creation/editing page.</comment>
                     <depends>
                         <field id="enable">1</field>
                     </depends>
                 </field>
                 <field id="product_rate_percentage_4" translate="label" type="text" sortOrder="1" showInDefault="1" showInWebsite="0" showInStore="0">
-                    <label>Product Percentage Rate 4</label>
+                    <label>Percentage Rate 4</label>
                     <validate>validate-number</validate>
-                    <comment>Applied to product prices (Direct calculation).</comment>
+                    <comment>Applied to product prices (Direct calculation). This rate must be selected on the product creation/editing page.</comment>
                     <depends>
                         <field id="enable">1</field>
                     </depends>
                 </field>
                 <field id="product_rate_percentage_5" translate="label" type="text" sortOrder="1" showInDefault="1" showInWebsite="0" showInStore="0">
-                    <label>Product Percentage Rate 5</label>
+                    <label>Percentage Rate 5</label>
                     <validate>validate-number</validate>
-                    <comment>Applied to product prices (Direct calculation).</comment>
+                    <comment>Applied to product prices (Direct calculation). This rate must be selected on the product creation/editing page.</comment>
                     <depends>
                         <field id="enable">1</field>
                     </depends>
