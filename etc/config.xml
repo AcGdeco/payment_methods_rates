@@ -7,6 +7,12 @@
                 <rate_percentage>4.99</rate_percentage>
                 <rate_value>0.4</rate_value>
             </general>
+            <shipping_rates>
+                <apply_rate_percentage>0</apply_rate_percentage>
+                <apply_rate_value>0</apply_rate_value>
+                <apply_general_rate_1>0</apply_general_rate_1>
+                <apply_general_rate_2>0</apply_general_rate_2>
+            </shipping_rates>
             <installments_fees>
                 <installments_fees_enable>1</installments_fees_enable>
                 <fee_0>0</fee_0>

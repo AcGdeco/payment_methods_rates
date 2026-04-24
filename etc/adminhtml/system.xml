@@ -16,7 +16,7 @@
                 <field id="rate_percentage" translate="label" type="text" sortOrder="1" showInDefault="1" showInWebsite="0" showInStore="0" canRestore="1">
                     <label>Percentage Rate</label>
                     <validate>validate-number</validate>
-                    <comment>Applied to shipping and product prices (Inverse calculation).</comment>
+                    <comment>Applied to all product prices using inverse calculation: price / (1 - rate/100). Can also be applied to shipping — enable in "Taxas Aplicadas ao Frete" below.</comment>
                     <depends>
                         <field id="enable">1</field>
                     </depends>
@@ -24,7 +24,7 @@
                 <field id="rate_value" translate="label" type="text" sortOrder="1" showInDefault="1" showInWebsite="0" showInStore="0" canRestore="1">
                     <label>Numerical Rate</label>
                     <validate>validate-number</validate>
-                    <comment>Applied to shipping.</comment>
+                    <comment>Fixed value added to the shipping price. Not applied to product prices. Enable in "Taxas Aplicadas ao Frete" below.</comment>
                     <depends>
                         <field id="enable">1</field>
                     </depends>
@@ -32,7 +32,7 @@
                 <field id="general_rate_percentage_1" translate="label" type="text" sortOrder="1" showInDefault="1" showInWebsite="0" showInStore="0">
                     <label>General Percentage Rate 1</label>
                     <validate>validate-number</validate>
-                    <comment>Applied to all product prices (Direct calculation).</comment>
+                    <comment>Applied to all product prices (direct calculation: price × rate / 100). Can also be applied to shipping — enable in "Taxas Aplicadas ao Frete" below.</comment>
                     <depends>
                         <field id="enable">1</field>
                     </depends>
@@ -40,7 +40,7 @@
                 <field id="general_rate_percentage_2" translate="label" type="text" sortOrder="1" showInDefault="1" showInWebsite="0" showInStore="0">
                     <label>General Percentage Rate 2</label>
                     <validate>validate-number</validate>
-                    <comment>Applied to all product prices (Direct calculation).</comment>
+                    <comment>Applied to all product prices (direct calculation: price × rate / 100). Can also be applied to shipping — enable in "Taxas Aplicadas ao Frete" below.</comment>
                     <depends>
                         <field id="enable">1</field>
                     </depends>
@@ -48,7 +48,7 @@
                 <field id="product_rate_percentage_1" translate="label" type="text" sortOrder="1" showInDefault="1" showInWebsite="0" showInStore="0">
                     <label>Percentage Rate 1</label>
                     <validate>validate-number</validate>
-                    <comment>Applied to product prices (Direct calculation). This rate must be selected on the product creation/editing page.</comment>
+                    <comment>Applied to individual product prices (direct calculation: price × rate / 100). Select this rate on the product edit page via the "taxa_select" attribute (Taxa 1).</comment>
                     <depends>
                         <field id="enable">1</field>
                     </depends>
@@ -56,7 +56,7 @@
                 <field id="product_rate_percentage_2" translate="label" type="text" sortOrder="1" showInDefault="1" showInWebsite="0" showInStore="0">
                     <label>Percentage Rate 2</label>
                     <validate>validate-number</validate>
-                    <comment>Applied to product prices (Direct calculation). This rate must be selected on the product creation/editing page.</comment>
+                    <comment>Applied to individual product prices (direct calculation: price × rate / 100). Select this rate on the product edit page via the "taxa_select" attribute (Taxa 2).</comment>
                     <depends>
                         <field id="enable">1</field>
                     </depends>
@@ -64,7 +64,7 @@
                 <field id="product_rate_percentage_3" translate="label" type="text" sortOrder="1" showInDefault="1" showInWebsite="0" showInStore="0">
                     <label>Percentage Rate 3</label>
                     <validate>validate-number</validate>
-                    <comment>Applied to product prices (Direct calculation). This rate must be selected on the product creation/editing page.</comment>
+                    <comment>Applied to individual product prices (direct calculation: price × rate / 100). Select this rate on the product edit page via the "taxa_select" attribute (Taxa 3).</comment>
                     <depends>
                         <field id="enable">1</field>
                     </depends>
@@ -72,7 +72,7 @@
                 <field id="product_rate_percentage_4" translate="label" type="text" sortOrder="1" showInDefault="1" showInWebsite="0" showInStore="0">
                     <label>Percentage Rate 4</label>
                     <validate>validate-number</validate>
-                    <comment>Applied to product prices (Direct calculation). This rate must be selected on the product creation/editing page.</comment>
+                    <comment>Applied to individual product prices (direct calculation: price × rate / 100). Select this rate on the product edit page via the "taxa_select" attribute (Taxa 4).</comment>
                     <depends>
                         <field id="enable">1</field>
                     </depends>
@@ -80,10 +80,37 @@
                 <field id="product_rate_percentage_5" translate="label" type="text" sortOrder="1" showInDefault="1" showInWebsite="0" showInStore="0">
                     <label>Percentage Rate 5</label>
                     <validate>validate-number</validate>
-                    <comment>Applied to product prices (Direct calculation). This rate must be selected on the product creation/editing page.</comment>
+                    <comment>Applied to individual product prices (direct calculation: price × rate / 100). Select this rate on the product edit page via the "taxa_select" attribute (Taxa 5).</comment>
                     <depends>
                         <field id="enable">1</field>
                     </depends>
+                </field>
+            </group>
+            <group id="shipping_rates" translate="label" type="text" sortOrder="15" showInDefault="1" showInWebsite="0" showInStore="0">
+                <depends>
+                    <field id="decorates/general/enable">1</field>
+                </depends>
+                <label>Taxas Aplicadas ao Frete</label>
+                <comment>Escolha quais taxas serão aplicadas ao preço do frete em todos os carriers. Ordem de aplicação: General Rate 1 → General Rate 2 → Numerical Rate → Percentage Rate (última).</comment>
+                <field id="apply_rate_percentage" translate="label" type="select" sortOrder="10" showInDefault="1" showInWebsite="0" showInStore="0">
+                    <label>Aplicar Percentage Rate ao Frete</label>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                    <comment>Aplica a Percentage Rate ao frete usando cálculo inverso: preço / (1 - taxa/100). Aplicada por último, após todas as demais taxas.</comment>
+                </field>
+                <field id="apply_rate_value" translate="label" type="select" sortOrder="20" showInDefault="1" showInWebsite="0" showInStore="0">
+                    <label>Aplicar Numerical Rate ao Frete</label>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                    <comment>Adiciona o valor numérico fixo da Numerical Rate ao preço do frete.</comment>
+                </field>
+                <field id="apply_general_rate_1" translate="label" type="select" sortOrder="30" showInDefault="1" showInWebsite="0" showInStore="0">
+                    <label>Aplicar General Percentage Rate 1 ao Frete</label>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                    <comment>Aplica a General Percentage Rate 1 ao frete (cálculo direto sobre o preço original do frete: preço × taxa / 100).</comment>
+                </field>
+                <field id="apply_general_rate_2" translate="label" type="select" sortOrder="40" showInDefault="1" showInWebsite="0" showInStore="0">
+                    <label>Aplicar General Percentage Rate 2 ao Frete</label>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                    <comment>Aplica a General Percentage Rate 2 ao frete (cálculo direto sobre o preço original do frete: preço × taxa / 100).</comment>
                 </field>
             </group>
             <group id="installments_fees" translate="label" type="text" sortOrder="20" showInDefault="1" showInWebsite="0" showInStore="0">

@@ -25,7 +25,7 @@ class Shipping
     ): Rate {
         if($this->helperData->getEnable()) {
             if ($rate instanceof Method) {
-                $ratePrice = $this->helperData->getNumericalPercentageRatePrice($result->getPrice());
+                $ratePrice = $this->helperData->getShippingRatePrice((float) $result->getPrice());
                 $result->setPrice($ratePrice);
             }
         }

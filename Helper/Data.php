@@ -189,6 +189,91 @@ class Data extends \Magento\Framework\App\Helper\AbstractHelper
         );
     }
 
+    public function getShippingApplyRatePercentage(): bool
+    {
+        return (bool) $this->scopeConfig->getValue(
+            'decorates/shipping_rates/apply_rate_percentage',
+            \Magento\Store\Model\ScopeInterface::SCOPE_STORE
+        );
+    }
+
+    public function getShippingApplyRateValue(): bool
+    {
+        return (bool) $this->scopeConfig->getValue(
+            'decorates/shipping_rates/apply_rate_value',
+            \Magento\Store\Model\ScopeInterface::SCOPE_STORE
+        );
+    }
+
+    public function getShippingApplyGeneralRate1(): bool
+    {
+        return (bool) $this->scopeConfig->getValue(
+            'decorates/shipping_rates/apply_general_rate_1',
+            \Magento\Store\Model\ScopeInterface::SCOPE_STORE
+        );
+    }
+
+    public function getShippingApplyGeneralRate2(): bool
+    {
+        return (bool) $this->scopeConfig->getValue(
+            'decorates/shipping_rates/apply_general_rate_2',
+            \Magento\Store\Model\ScopeInterface::SCOPE_STORE
+        );
+    }
+
+    /**
+     * Calculate the final shipping price applying only the rates that are
+     * individually enabled in Stores > Configuration > Sales > Rates >
+     * Taxas Aplicadas ao Frete.
+     *
+     * Calculation order:
+     *  1. General Rate 1 (direct %)
+     *  2. General Rate 2 (direct %)
+     *  3. Numerical Rate (fixed addition)
+     *  4. Percentage Rate (inverse: price / (1 - rate/100))  ← applied last
+     *
+     * @param float $price Original shipping price in store currency.
+     * @return float
+     */
+    public function getShippingRatePrice(float $price): float
+    {
+        if ($price == 0) {
+            return $price;
+        }
+
+        $basePrice  = $price;
+        $ratePrice  = $price;
+        $generalRates = $this->getGeneralPercentageRate();
+
+        // 1. General Percentage Rate 1 (direct addition based on original price)
+        if ($this->getShippingApplyGeneralRate1() && !empty($generalRates[0])) {
+            $ratePrice += $basePrice * ((float) $generalRates[0]) / 100;
+        }
+
+        // 2. General Percentage Rate 2 (direct addition based on original price)
+        if ($this->getShippingApplyGeneralRate2() && !empty($generalRates[1])) {
+            $ratePrice += $basePrice * ((float) $generalRates[1]) / 100;
+        }
+
+        // 3. Numerical Rate (fixed value)
+        if ($this->getShippingApplyRateValue()) {
+            $numericalRate = (float) $this->getNumericalRate();
+            if ($numericalRate != 0) {
+                $ratePrice += $numericalRate;
+            }
+        }
+
+        // 4. Percentage Rate (inverse calculation — covers payment fees passed through)
+        if ($this->getShippingApplyRatePercentage()) {
+            $percentageRate = (float) $this->getPercentageRate();
+            if ($percentageRate != 0) {
+                $ratePrice = $ratePrice / (1 - ($percentageRate / 100));
+            }
+        }
+
+        return $ratePrice;
+    }
+
     public function getInstallmentsFees()
     {
         for($i = 0; $i <= 17; $i++){
